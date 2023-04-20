@@ -6,7 +6,7 @@ const MoreNews = () => {
     <section className="mt-10">
       <CenterContent>
         <h3 className="mb-3 text-2xl font-bold">More news</h3>
-        <div className="flex gap-6">
+        <div className="flex gap-16">
           <div className="grid grid-cols-3 gap-x-9 gap-y-12">
             <NewsCard />
             <NewsCard />

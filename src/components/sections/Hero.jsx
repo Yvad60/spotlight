@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section>
       <CenterContent>
-        <h3 className="mt-5 mb-3 text-2xl font-bold">Featured stories</h3>
+        <h3 className="my-6 text-2xl font-bold">Featured stories</h3>
         <div className="grid w-full grid-cols-2 gap-2">
           <FeaturedNews variant="big" />
           <FeaturedNews variant="wide" />

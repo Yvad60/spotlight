@@ -1,10 +1,10 @@
-import sample from "/images/sample.jpg";
 import { FaUser } from "react-icons/fa";
+import sample from "/images/sample.jpg";
 
 const News = () => {
   return (
     <div className="flex flex-col">
-      <img src={sample} alt="Article cover" className="w-full" />
+      <img src={sample} alt="Article cover" className="w-full rounded" />
       <h4 className="font-bold text-lg mt-3 leading-7">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus cum
         nostrum ipsam.

@@ -6,10 +6,12 @@ import {
 } from "../../../helpers/articles";
 import FeaturedNewsSkeleton from "../../skeletons/FeaturedNews";
 
-const FeaturedNews = ({ variant, article, loading }) => {
-  if (loading) return <FeaturedNewsSkeleton variant={variant} />;
-  const { source, author, title, description, url, urlToImage, publishedAt } =
+const FeaturedNews = ({ variant, article, isLoading }) => {
+  if (isLoading) return <FeaturedNewsSkeleton variant={variant} />;
+
+  const { source, author, title, description, urlToImage, publishedAt } =
     article;
+
   const titleClasses = classnames("font-semibold mb-3", {
     "text-4xl": variant === "big",
     "text-3xl": variant === "wide",

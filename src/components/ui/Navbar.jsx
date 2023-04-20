@@ -1,9 +1,17 @@
 import { CgSearch } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
+import { setQueryLanguage } from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
 import franceFlag from "/images/france-flag.png";
 import ukFlag from "/images/united-kingdom-flag.png";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { queryLanguage } = useSelector((state) => state.articles);
+
+  const handleSelectLanguage = (language) =>
+    dispatch(setQueryLanguage(language));
+
   return (
     <header className="pt-5 pb-2 shadow-md bg-light sticky z-50 top-0">
       <CenterContent>
@@ -21,7 +29,12 @@ const Navbar = () => {
               </button>
             </div>
             <div>
-              <button className="text-yellow-600 font-semibold">
+              <button
+                className={
+                  queryLanguage === "us" && "text-yellow-600 font-semibold"
+                }
+                onClick={() => handleSelectLanguage("us")}
+              >
                 <img
                   src={ukFlag}
                   alt="UK flag"
@@ -30,7 +43,12 @@ const Navbar = () => {
                 English
               </button>
               <span className="mx-2"> | </span>
-              <button>
+              <button
+                onClick={() => handleSelectLanguage("fr")}
+                className={
+                  queryLanguage === "fr" && "text-yellow-600 font-semibold"
+                }
+              >
                 <img
                   src={franceFlag}
                   alt="France flag"

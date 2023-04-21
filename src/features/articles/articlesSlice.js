@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { queryLanguage: "us", selectedCategory: "trending" };
+const initialState = { queryLanguage: "us", selectedCategory: "trending", limit: 11 };
 
 const articlesSlice = createSlice({
   name: "articles",
@@ -11,6 +11,9 @@ const articlesSlice = createSlice({
     },
     setCategory: (state, action) => {
       state.selectedCategory = action.payload;
+    },
+    setLimit: (state, action) => {
+      state.limit = action.payload;
     },
   },
 });

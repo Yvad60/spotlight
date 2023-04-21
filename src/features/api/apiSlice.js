@@ -12,9 +12,12 @@ const apiSlice = createApi({
   endpoints: (builder) => ({
     getMainArticles: builder.query({
       query: (args) => {
-        const { country, category } = args;
-        if (category === "trending") return addApiKey(`/top-headlines?country=${country}`);
-        return addApiKey(`/top-headlines?country=${country}&category=${category}`);
+        const { country, category, limit } = args;
+        if (category === "trending")
+          return addApiKey(`/top-headlines?country=${country}&pageSize=${limit}`);
+        return addApiKey(
+          `/top-headlines?country=${country}&category=${category}&pageSize=${limit}`
+        );
       },
       transformResponse: (response) => {
         if (response.articles) return addArticlesIds(response.articles);

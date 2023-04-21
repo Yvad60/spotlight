@@ -12,12 +12,11 @@ const Navbar = () => {
   const handleSelectLanguage = (language) => dispatch(setQueryLanguage(language));
   const selectCategory = (category) => dispatch(setCategory(category));
 
-  const selectedCategoryClassNames =
-    "text-yellow-600 hover:bg-[#f4efea] border-b-current pb-3 border-b-[3px] px-2";
+  const selectedCategoryClassNames = "text-yellow-600 border-b-current pb-3 border-b-[3px]";
   const categories = ["trending", "health", "business", "sports", "technology"];
 
   return (
-    <header className="pt-5 pb-2 shadow-md bg-light sticky z-50 top-0">
+    <header className="sticky top-0 z-50 pt-5 pb-2 shadow-md bg-light">
       <CenterContent>
         <div className="flex items-center justify-between">
           <h2 className="text-4xl font-semibold font-newsreader">Spotlight</h2>
@@ -52,10 +51,11 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center gap-10 mt-4 font-semibold">
-          {categories.map((category) => (
+        <div className="flex justify-center gap-8 mt-4 font-semibold">
+          {categories.map((category, index) => (
             <nav
-              className={`capitalize ${
+              key={index}
+              className={`capitalize cursor-pointer hover:bg-[#f4efea] px-2 ${
                 category === selectedCategory && selectedCategoryClassNames
               }`}
               onClick={() => selectCategory(category)}

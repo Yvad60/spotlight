@@ -1,16 +1,20 @@
 import { CgSearch } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
-import { setQueryLanguage } from "../../features/articles/articlesSlice";
+import { setCategory, setQueryLanguage } from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
 import franceFlag from "/images/france-flag.png";
 import ukFlag from "/images/united-kingdom-flag.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { queryLanguage } = useSelector((state) => state.articles);
+  const { queryLanguage, selectedCategory } = useSelector((state) => state.articles);
 
-  const handleSelectLanguage = (language) =>
-    dispatch(setQueryLanguage(language));
+  const handleSelectLanguage = (language) => dispatch(setQueryLanguage(language));
+  const selectCategory = (category) => dispatch(setCategory(category));
+
+  const selectedCategoryClassNames =
+    "text-yellow-600 hover:bg-[#f4efea] border-b-current pb-3 border-b-[3px] px-2";
+  const categories = ["trending", "health", "business", "sports", "technology"];
 
   return (
     <header className="pt-5 pb-2 shadow-md bg-light sticky z-50 top-0">
@@ -30,30 +34,18 @@ const Navbar = () => {
             </div>
             <div>
               <button
-                className={
-                  queryLanguage === "us" && "text-yellow-600 font-semibold"
-                }
+                className={queryLanguage === "us" && "text-yellow-600 font-semibold"}
                 onClick={() => handleSelectLanguage("us")}
               >
-                <img
-                  src={ukFlag}
-                  alt="UK flag"
-                  className="inline mr-2 w-[18px]"
-                />
+                <img src={ukFlag} alt="UK flag" className="inline mr-2 w-[18px]" />
                 English
               </button>
               <span className="mx-2"> | </span>
               <button
                 onClick={() => handleSelectLanguage("fr")}
-                className={
-                  queryLanguage === "fr" && "text-yellow-600 font-semibold"
-                }
+                className={queryLanguage === "fr" && "text-yellow-600 font-semibold"}
               >
-                <img
-                  src={franceFlag}
-                  alt="France flag"
-                  className="inline mr-2 w-[18px]"
-                />
+                <img src={franceFlag} alt="France flag" className="inline mr-2 w-[18px]" />
                 French
               </button>
               <span></span>
@@ -61,13 +53,16 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex justify-center gap-10 mt-4 font-semibold">
-          <nav className="text-yellow-600 hover:bg-[#f4efea] border-b-current pb-3 border-b-[3px] px-2">
-            Trending
-          </nav>
-          <nav>Politics</nav>
-          <nav>Business</nav>
-          <nav>Sport</nav>
-          <nav>Tech</nav>
+          {categories.map((category) => (
+            <nav
+              className={`capitalize ${
+                category === selectedCategory && selectedCategoryClassNames
+              }`}
+              onClick={() => selectCategory(category)}
+            >
+              {category}
+            </nav>
+          ))}
         </div>
       </CenterContent>
     </header>

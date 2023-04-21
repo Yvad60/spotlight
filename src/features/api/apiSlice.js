@@ -5,14 +5,17 @@ const { VITE_API_BASE_URL, VITE_API_KEY } = import.meta.env;
 
 const addApiKey = (query) => `${query}&apiKey=${VITE_API_KEY}`;
 
-const addArticlesIds = (articles) =>
-  articles.map((article) => ({ id: nanoid(), ...article }));
+const addArticlesIds = (articles) => articles.map((article) => ({ id: nanoid(), ...article }));
 
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: VITE_API_BASE_URL }),
   endpoints: (builder) => ({
-    getArticlesByCountry: builder.query({
-      query: (country) => addApiKey(`/top-headlines?country=${country}`),
+    getMainArticles: builder.query({
+      query: (args) => {
+        const { country, category } = args;
+        if (category === "trending") return addApiKey(`/top-headlines?country=${country}`);
+        return addApiKey(`/top-headlines?country=${country}&category=${category}`);
+      },
       transformResponse: (response) => {
         if (response.articles) return addArticlesIds(response.articles);
       },
@@ -23,9 +26,6 @@ const apiSlice = createApi({
   }),
 });
 
-export const {
-  useGetArticlesByCountryQuery,
-  useLazyGetArticlesByPublisherQuery,
-} = apiSlice;
+export const { useGetMainArticlesQuery, useLazyGetArticlesByPublisherQuery } = apiSlice;
 
 export default apiSlice;

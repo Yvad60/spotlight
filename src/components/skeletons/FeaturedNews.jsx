@@ -7,7 +7,7 @@ const FeaturedNews = ({ variant }) => {
     "h-4 rounded": variant === "small",
   });
 
-  const wrapperClasses = classnames("relative", {
+  const wrapperClasses = classnames("relative border border-gray-300 rounded", {
     "row-span-2": variant === "big",
     "w-full h-[250px]": variant === "wide",
     "w-1/2 h-full": variant === "small",
@@ -15,8 +15,8 @@ const FeaturedNews = ({ variant }) => {
 
   return (
     <div className={wrapperClasses}>
-      <div className="absolute px-10 mx-4 mt-5 font-semibold text-white bg-[#c8b29e] rounded-3xl shadow-md py-4 animate-pulse"></div>
-      <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 bg-gradient-to-b from-transparent to-yellow-900 bg-opacity-5">
+      <div className="absolute px-10 mx-4 mt-5 bg-[#c8b29e] rounded-3xl shadow-md py-4 animate-pulse"></div>
+      <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 bg-gradient-to-b from-transparent rounded to-yellow-900 bg-opacity-5">
         <div className="flex flex-col gap-4 mb-6">
           <h3 className={`w-full ${titleClasses}`}></h3>
           <h3 className={`w-1/2 ${titleClasses}`}></h3>

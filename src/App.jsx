@@ -1,16 +1,19 @@
-import Hero from "./components/sections/Hero";
-import MoreNews from "./components/sections/MoreNews";
+import { Route, Routes } from "react-router-dom";
 import Footer from "./components/ui/Footer";
 import Navbar from "./components/ui/Navbar";
+import Article from "./pages/Article";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
-    <main className="text-yellow-950 bg-light">
+    <div className="bg-light flex flex-col min-h-screen">
       <Navbar />
-      <Hero />
-      <MoreNews />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/article/:id" element={<Article />} />
+      </Routes>
       <Footer />
-    </main>
+    </div>
   );
 };
 

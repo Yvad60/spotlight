@@ -1,16 +1,26 @@
 import { CgSearch } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setCategory, setQueryLanguage } from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
 import franceFlag from "/images/france-flag.png";
 import ukFlag from "/images/united-kingdom-flag.png";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { queryLanguage, selectedCategory } = useSelector((state) => state.articles);
 
-  const handleSelectLanguage = (language) => dispatch(setQueryLanguage(language));
-  const selectCategory = (category) => dispatch(setCategory(category));
+  const handleSelectLanguage = (language) => {
+    dispatch(setQueryLanguage(language));
+    if (pathname !== "/") navigate("/");
+  };
+
+  const selectCategory = (category) => {
+    dispatch(setCategory(category));
+    if (pathname !== "/") navigate("/");
+  };
 
   const selectedCategoryClassNames = "text-yellow-600 border-b-current pb-3 border-b-[3px]";
   const categories = ["trending", "health", "business", "sports", "technology"];
@@ -27,7 +37,7 @@ const Navbar = () => {
                 className="w-full h-full pl-3 border border-gray-400 rounded-tl-lg rounded-bl-lg outline-none placeholder:text-gray-400"
                 placeholder="Search articles..."
               />
-              <button className="h-full px-4 text-xl text-white bg-yellow-600 rounded-tr-lg rounded-br-lg">
+              <button className="h-full px-4 text-xl text-white bg-yellow-700 rounded-tr-lg rounded-br-lg">
                 <CgSearch />
               </button>
             </div>

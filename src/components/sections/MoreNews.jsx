@@ -5,11 +5,12 @@ import NewsCard from "../ui/cards/News";
 
 const MoreNews = () => {
   const { queryLanguage, selectedCategory, limit } = useSelector((state) => state.articles);
-  const { data } = useGetMainArticlesQuery({
+  const { isFetching, data, error, isError } = useGetMainArticlesQuery({
     country: queryLanguage,
     category: selectedCategory,
     limit,
   });
+  if (isError) return null;
 
   return (
     <section className="mt-10">

@@ -3,7 +3,7 @@ import CenterContent from "../layout/CenterContent";
 
 const Footer = () => {
   return (
-    <footer className="bg-yellow-700 py-8 mt-14 text-light">
+    <footer className="bg-yellow-800 py-8 mt-14 text-light">
       <CenterContent>
         <div className="flex justify-between items-center">
           <h2 className="text-4xl font-semibold font-newsreader">Spotlight</h2>

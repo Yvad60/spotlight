@@ -15,8 +15,11 @@ const articlesSlice = createSlice({
     setLimit: (state, action) => {
       state.limit = action.payload;
     },
+    setSelectedArticle: (state, action) => {
+      state.selectedArticle = action.payload;
+    },
   },
 });
 
-export const { setQueryLanguage, setCategory } = articlesSlice.actions;
+export const { setQueryLanguage, setCategory, setSelectedArticle } = articlesSlice.actions;
 export default articlesSlice.reducer;

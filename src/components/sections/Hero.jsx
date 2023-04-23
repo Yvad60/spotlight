@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import { useGetMainArticlesQuery } from "../../features/api/apiSlice";
 import CenterContent from "../layout/CenterContent";
+import SnackBar from "../ui/SnackBar";
 import FeaturedNews from "../ui/cards/FeaturedNews";
 
 const Hero = () => {
   const { queryLanguage, selectedCategory, limit } = useSelector((state) => state.articles);
-  const { isFetching, data } = useGetMainArticlesQuery({
+  const { isFetching, data, error, isError } = useGetMainArticlesQuery({
     country: queryLanguage,
     category: selectedCategory,
     limit,
@@ -15,6 +16,7 @@ const Hero = () => {
     selectedCategory === "trending"
       ? `Featured ${selectedCategory} stories`
       : `Featured stories in ${selectedCategory}`;
+  if (isError) return <SnackBar message={error?.data?.message || error.error} />;
 
   return (
     <section>

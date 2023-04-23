@@ -1,13 +1,22 @@
 import classnames from "classnames";
 import { FaUser } from "react-icons/fa";
-import { normalizeDate, removePublisherFromTitle } from "../../../helpers/articles";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setSelectedArticle } from "../../../features/articles/articlesSlice";
+import {
+  normalizeAuthors,
+  normalizeDate,
+  removePublisherFromTitle,
+} from "../../../helpers/articles";
 import FeaturedNewsSkeleton from "../../skeletons/FeaturedNews";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 
 const FeaturedNews = ({ variant, article, isFetching }) => {
   if (isFetching) return <FeaturedNewsSkeleton variant={variant} />;
 
-  const { source, author, title, description, urlToImage, publishedAt } = article;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id, source, author, title, description, urlToImage, publishedAt } = article;
 
   const titleClasses = classnames("font-semibold mb-3", {
     "text-4xl": variant === "big",
@@ -15,7 +24,7 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
     "text-xl line-clamp-3": variant === "small",
   });
 
-  const wrapperClasses = classnames("relative", {
+  const wrapperClasses = classnames("relative cursor-pointer select-none", {
     "row-span-2": variant === "big",
     "w-full h-[250px]": variant === "wide",
     "w-1/2 h-full": variant === "small",
@@ -25,8 +34,13 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
     "text-sm line-clamp-1": variant === "small",
   });
 
+  const viewArticle = () => {
+    dispatch(setSelectedArticle(article));
+    navigate(`/article/${id}`);
+  };
+
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} onClick={viewArticle}>
       <h3 className="absolute px-3 mx-4 mt-5 font-semibold text-white bg-yellow-600 rounded-full shadow-md py-[6px]">
         {source.name}
       </h3>
@@ -38,7 +52,7 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
         <div className={footerClasses}>
           <h4 className="flex gap-1 line-clamp-1">
             <FaUser className="text-xl" />
-            {author || "Anonymous"}
+            {(author && normalizeAuthors(author)) || "Anonymous"}
           </h4>
           <h4>{normalizeDate(publishedAt)}</h4>
         </div>

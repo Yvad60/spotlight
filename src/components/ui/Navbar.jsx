@@ -1,6 +1,6 @@
 import { CgSearch } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setCategory, setQueryLanguage } from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
 import franceFlag from "/images/france-flag.png";
@@ -29,7 +29,9 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 pt-5 pb-2 shadow-md bg-light">
       <CenterContent>
         <div className="flex items-center justify-between">
-          <h2 className="text-4xl font-semibold font-newsreader">Spotlight</h2>
+          <Link to="/" className="text-4xl font-semibold font-newsreader">
+            Spotlight
+          </Link>
           <div className="flex items-center gap-6">
             <div className="flex h-10 max-w-2xl w-[320px]">
               <input

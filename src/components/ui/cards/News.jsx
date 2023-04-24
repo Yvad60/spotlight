@@ -1,4 +1,7 @@
 import { FaUser } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setSelectedArticle } from "../../../features/articles/articlesSlice";
 import {
   normalizeAuthors,
   normalizeDate,
@@ -7,9 +10,17 @@ import {
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 
 const News = ({ article }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { source, author, title, urlToImage, publishedAt } = article;
+
+  const viewArticle = () => {
+    dispatch(setSelectedArticle(article));
+    navigate(`/article/${article.id}`);
+  };
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col cursor-pointer" onClick={viewArticle}>
       <h3 className="absolute px-2 py-1 mx-3 mt-3 text-sm font-semibold text-white bg-yellow-600 rounded-full shadow-md">
         {source.name}
       </h3>

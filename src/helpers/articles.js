@@ -16,3 +16,11 @@ export const normalizeAuthors = (articleAuthor) => {
   const authors = articleAuthor.split(",");
   return authors[0];
 };
+
+export const countReadingMinutes = (content) => {
+  const readingCharactersPerMinute = 1300; // according to research
+  const teaser = content.split(/\[.*\]/)[0];
+  const additionalCharacters = Number(content.match(/(?<=\[\+)\d+/g)?.[0]);
+  const minutes = Math.ceil((teaser.length + additionalCharacters) / readingCharactersPerMinute);
+  return minutes || null;
+};

@@ -4,3 +4,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply scrollbar-thumb-[#A27848] scrollbar-track-[#e5d3c1] text-[#24190b] scrollbar scrollbar-w-3 scrollbar-thumb-rounded-full;
+  }
+}

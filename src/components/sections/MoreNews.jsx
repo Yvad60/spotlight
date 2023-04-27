@@ -21,12 +21,11 @@ const MoreNews = () => {
             {data &&
               data.slice(5).map((article, index) => <NewsCard article={article} key={index} />)}
           </div>
-          <div className="w-[300px] flex-shrink-0 grow-0 overflow-y-auto max-h-[600px] sticky">
-            <h3 className="text-2xl font-semibold sticky top-0 bg-light pb-2">
-              Available publishers
-            </h3>
-            <div className="mt-2 divide-y-2">
-              <h3 className="py-3 px-2 hover:bg-[#f4efea]">BBC News</h3>
+
+          <div className="w-[300px] flex-shrink-0 grow-0 sticky">
+            <h3 className="text-2xl font-semibold  bg-light pb-2">Available publishers</h3>
+            <div className="mt-2 divide-y-2 overflow-y-auto max-h-[600px] scrollbar-thumb-[#A27848] scrollbar-track-[#e5d3c1] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-w-8">
+              <h3 className="py-3 px-2 hover:bg-[#f4efea] sticky top-0 bg-red-300">BBC News</h3>
               <h3 className="py-3 px-2 hover:bg-[#f4efea]">BBC News</h3>
               <h3 className="py-3 px-2 hover:bg-[#f4efea]">BBC News</h3>
               <h3 className="py-3 px-2 hover:bg-[#f4efea]">BBC News</h3>

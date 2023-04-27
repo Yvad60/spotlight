@@ -12,10 +12,9 @@ import FeaturedNewsSkeleton from "../../skeletons/FeaturedNews";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 
 const FeaturedNews = ({ variant, article, isFetching }) => {
-  if (isFetching) return <FeaturedNewsSkeleton variant={variant} />;
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  if (isFetching) return <FeaturedNewsSkeleton variant={variant} />;
   const { id, source, author, title, description, urlToImage, publishedAt } = article;
 
   const titleClasses = classnames("font-semibold mb-3", {

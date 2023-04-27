@@ -22,7 +22,7 @@ const Navbar = () => {
     if (pathname !== "/") navigate("/");
   };
 
-  const selectedCategoryClassNames = "text-yellow-600 border-b-current pb-3 border-b-[3px]";
+  const selectedCategoryClassNames = "text-yellow-700 border-b-current pb-3 border-b-[3px]";
   const categories = ["trending", "health", "business", "sports", "technology"];
 
   return (
@@ -39,13 +39,13 @@ const Navbar = () => {
                 className="w-full h-full pl-3 border border-gray-400 rounded-tl-lg rounded-bl-lg outline-none placeholder:text-gray-400"
                 placeholder="Search articles..."
               />
-              <button className="h-full px-4 text-xl text-white bg-yellow-700 rounded-tr-lg rounded-br-lg">
+              <button className="h-full px-4 text-xl text-white bg-primary rounded-tr-lg rounded-br-lg">
                 <CgSearch />
               </button>
             </div>
             <div>
               <button
-                className={queryLanguage === "us" && "text-yellow-600 font-semibold"}
+                className={queryLanguage === "us" && "text-yellow-700 font-semibold"}
                 onClick={() => handleSelectLanguage("us")}
               >
                 <img src={ukFlag} alt="UK flag" className="inline mr-2 w-[18px]" />

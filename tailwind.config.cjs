@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{jsx,js}"],
+  content: ["./src/**/*.{jsx,js}", "/index.html"],
   theme: {
     extend: {
       colors: {
-        "light": "#f6f4f0",
+        light: "#f6f4f0",
+        primary: "#8C6232",
       },
       fontFamily: {
         newsreader: ["Newsreader", "serif"],
@@ -12,5 +13,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
 };

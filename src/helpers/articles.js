@@ -24,3 +24,17 @@ export const countReadingMinutes = (content) => {
   const minutes = Math.ceil((teaser.length + additionalCharacters) / readingCharactersPerMinute);
   return minutes || null;
 };
+
+export const getCountryFromCode = (countryCode) => {
+  if (!countryCode) return null;
+  const regionNamesInEnglish = new Intl.DisplayNames(["en"], { type: "region" });
+  return regionNamesInEnglish.of(countryCode.toUpperCase());
+};
+
+export const getLanguageFromCode = (languageCode) => {
+  if (!languageCode) return null;
+  const languageNamesInEnglish = new Intl.DisplayNames(["en"], { type: "language" });
+  return languageNamesInEnglish.of(languageCode.toUpperCase());
+};
+
+export const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);

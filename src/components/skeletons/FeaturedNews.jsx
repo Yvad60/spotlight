@@ -15,7 +15,6 @@ const FeaturedNews = ({ variant }) => {
 
   return (
     <div className={wrapperClasses}>
-      <div className="absolute px-10 mx-4 mt-5 bg-[#c8b29e] rounded-3xl shadow-md py-4 animate-pulse"></div>
       <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 bg-gradient-to-b from-transparent rounded to-yellow-900 bg-opacity-5">
         <div className="flex flex-col gap-4 mb-6">
           <div className={`w-full ${titleClasses}`}></div>

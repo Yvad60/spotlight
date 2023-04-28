@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { queryLanguage: "us", selectedCategory: "trending", limit: 11 };
+const initialState = {
+  queryLanguage: "us",
+  selectedCategory: "trending",
+  limit: 11,
+  selectedPublisher: null,
+};
 
 const articlesSlice = createSlice({
   name: "articles",
@@ -18,8 +23,13 @@ const articlesSlice = createSlice({
     setSelectedArticle: (state, action) => {
       state.selectedArticle = action.payload;
     },
+    selectPublisher: (state, action) => {
+      console.log("i am here with this action ", action);
+      state.selectedPublisher = action.payload;
+    },
   },
 });
 
-export const { setQueryLanguage, setCategory, setSelectedArticle } = articlesSlice.actions;
+export const { setQueryLanguage, setCategory, setSelectedArticle, selectPublisher } =
+  articlesSlice.actions;
 export default articlesSlice.reducer;

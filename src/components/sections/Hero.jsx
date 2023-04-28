@@ -5,11 +5,14 @@ import SnackBar from "../ui/SnackBar";
 import FeaturedNews from "../ui/cards/FeaturedNews";
 
 const Hero = () => {
-  const { queryLanguage, selectedCategory, limit } = useSelector((state) => state.articles);
+  const { queryLanguage, selectedCategory, limit, selectedPublisher } = useSelector(
+    (state) => state.articles
+  );
   const { isFetching, data, error, isError } = useGetMainArticlesQuery({
     country: queryLanguage,
     category: selectedCategory,
     limit,
+    source: selectedPublisher,
   });
 
   const title =

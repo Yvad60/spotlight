@@ -12,7 +12,8 @@ const apiSlice = createApi({
   endpoints: (builder) => ({
     getMainArticles: builder.query({
       query: (args) => {
-        const { country, category, limit } = args;
+        const { country, category, limit, source } = args;
+        if (source) return addApiKey(`/top-headlines?sources=${source}&pageSize=${limit}`);
         if (category === "trending")
           return addApiKey(`/top-headlines?country=${country}&pageSize=${limit}`);
         return addApiKey(
@@ -26,9 +27,17 @@ const apiSlice = createApi({
     getArticlesByPublisher: builder.query({
       query: (publisher) => addApiKey(`/top-headlines?sources=${publisher}`),
     }),
+    getAllPublishers: builder.query({
+      query: () => addApiKey("/top-headlines/sources?"),
+      transformResponse: (response) => response.sources,
+    }),
   }),
 });
 
-export const { useGetMainArticlesQuery, useLazyGetArticlesByPublisherQuery } = apiSlice;
+export const {
+  useGetMainArticlesQuery,
+  useLazyGetArticlesByPublisherQuery,
+  useGetAllPublishersQuery,
+} = apiSlice;
 
 export default apiSlice;

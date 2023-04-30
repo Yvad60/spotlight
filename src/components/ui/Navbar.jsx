@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { CgSearch } from "react-icons/cg";
+import { FiMenu } from "react-icons/fi";
+import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  setCategory,
-  setQueryLanguage,
-  setSearchKeyword,
-} from "../../features/articles/articlesSlice";
+
+import { useState } from "react";
+import { setCategory, setQueryLanguage } from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
+import SearchInput from "./SearchInput";
 import franceFlag from "/images/france-flag.png";
 import ukFlag from "/images/united-kingdom-flag.png";
 
@@ -15,9 +14,11 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const { queryLanguage, selectedCategory, searchKeyword } = useSelector((state) => state.articles);
-  const [keyword, setKeyword] = useState(searchKeyword);
+  const { queryLanguage, selectedCategory } = useSelector((state) => state.articles);
+  const selectedCategoryClassNames = "text-yellow-700 border-b-current pb-3 border-b-[3px]";
+  const categories = ["trending", "health", "business", "sports", "technology"];
 
   const handleSelectLanguage = (language) => {
     dispatch(setQueryLanguage(language));
@@ -29,44 +30,23 @@ const Navbar = () => {
     if (pathname !== "/") navigate("/");
   };
 
-  const handleChange = (event) => {
-    setKeyword(event.target.value);
-  };
-
-  const handleSearch = () => {
-    dispatch(setSearchKeyword(keyword));
-  };
-
-  useEffect(() => {
-    if (!searchKeyword) setKeyword("");
-  }, [searchKeyword]);
-
-  const selectedCategoryClassNames = "text-yellow-700 border-b-current pb-3 border-b-[3px]";
-  const categories = ["trending", "health", "business", "sports", "technology"];
+  const toggleNav = () => setIsNavOpen(!isNavOpen);
 
   return (
     <header className="sticky top-0 z-50 pt-5 pb-2 shadow-md bg-light">
       <CenterContent>
-        <div className="flex items-center justify-between">
-          <Link to="/" className="text-4xl font-semibold font-newsreader">
+        <div className="flex items-center justify-between pb-3 md:pb-0">
+          <Link to="/" className="text-3xl font-semibold md:text-4xl font-newsreader">
             Spotlight
           </Link>
-          <div className="flex items-center gap-6">
-            <div className="flex h-10 max-w-2xl w-[320px]">
-              <input
-                type="text"
-                className="w-full h-full pl-3 border border-gray-400 rounded-tl-lg rounded-bl-lg outline-none placeholder:text-gray-400"
-                onChange={handleChange}
-                value={keyword}
-                placeholder="Search articles..."
-              />
-              <button
-                className="h-full px-4 text-xl text-white bg-primary rounded-tr-lg rounded-br-lg"
-                onClick={handleSearch}
-              >
-                <CgSearch />
-              </button>
-            </div>
+
+          <nav className="md:hidden text-center" onClick={toggleNav}>
+            {isNavOpen ? <GrClose className="text-[26px]" /> : <FiMenu className="text-3xl" />}
+          </nav>
+
+          {/* Desktop */}
+          <div className="items-center hidden gap-6 md:flex">
+            <SearchInput />
             <div>
               <button
                 className={queryLanguage === "us" && "text-yellow-700 font-semibold"}
@@ -86,7 +66,44 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center gap-8 mt-4 font-semibold">
+        {isNavOpen && (
+          <div className="md:hidden flex flex-col gap-5 items-center mt-3">
+            <div className="flex flex-col w-full">
+              <h3 className="font-semibold text-lg">Categories</h3>
+              {categories.map((category, index) => (
+                <nav
+                  key={index}
+                  className={`capitalize cursor-pointer w-full hover:bg-[#f4efea] px-2 py-2 ${
+                    category === selectedCategory && selectedCategoryClassNames
+                  }`}
+                  onClick={() => selectCategory(category)}
+                >
+                  {category}
+                </nav>
+              ))}
+            </div>
+            <SearchInput />
+            <div>
+              <button
+                className={queryLanguage === "us" && "text-yellow-700 font-semibold"}
+                onClick={() => handleSelectLanguage("us")}
+              >
+                <img src={ukFlag} alt="UK flag" className="inline mr-2 w-[18px]" />
+                English
+              </button>
+              <span className="mx-2"> | </span>
+              <button
+                onClick={() => handleSelectLanguage("fr")}
+                className={queryLanguage === "fr" && "text-yellow-600 font-semibold"}
+              >
+                <img src={franceFlag} alt="France flag" className="inline mr-2 w-[18px]" />
+                French
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="justify-center hidden gap-8 mt-4 font-semibold md:flex">
           {categories.map((category, index) => (
             <nav
               key={index}

@@ -14,6 +14,8 @@ const articlesSlice = createSlice({
   reducers: {
     setQueryLanguage: (state, action) => {
       state.queryLanguage = action.payload;
+      state.searchKeyword = initialState.searchKeyword;
+      state.selectedPublisher = initialState.selectedPublisher;
     },
     setCategory: (state, action) => {
       state.selectedCategory = action.payload;

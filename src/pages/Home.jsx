@@ -8,7 +8,7 @@ const Home = () => {
 
   if (!isFetching && isError)
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center flex-1 px-3">
         <SnackBar message={error?.data?.message || error.error} />
       </div>
     );

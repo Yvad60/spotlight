@@ -38,3 +38,18 @@ export const getLanguageFromCode = (languageCode) => {
 };
 
 export const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
+
+export const setHeroSectionTitle = (selectedPublisher, selectedCategory, searchKeyword) => {
+  if (searchKeyword) return `Featured news about "${searchKeyword}"`;
+  if (selectedPublisher) return `Featured news from ${selectedPublisher}`;
+  return selectedCategory === "trending"
+    ? `Featured ${selectedCategory} news`
+    : `Featured news in ${selectedCategory}`;
+};
+
+export const setMoreNewsSectionTitle = (selectedPublisher, selectedCategory, searchKeyword) => {
+  if (searchKeyword) return `More news about "${searchKeyword}"`;
+  return selectedPublisher
+    ? `More news from ${selectedPublisher}`
+    : `More ${selectedCategory} news`;
+};

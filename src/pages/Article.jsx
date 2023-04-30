@@ -22,7 +22,7 @@ const Article = () => {
           <img
             src={urlToImage || fallbackArticleCover}
             alt=""
-            className="object-cover w-full h-full rounded-sm"
+            className="object-cover object-top w-full h-full rounded-sm"
           />
         </div>
         <h1 className="w-11/12 mt-5 text-5xl font-semibold">{removePublisherFromTitle(title)}</h1>
@@ -59,7 +59,6 @@ const Article = () => {
           <p
             className="text-[13px] mt-2 border-b-2 border-dotted border-current w-fit cursor-pointer"
             onMouseOver={() => setIsMessageVisible(true)}
-            onMouseLeave={() => setIsMessageVisible(false)}
           >
             Why you can't read the article here?
           </p>

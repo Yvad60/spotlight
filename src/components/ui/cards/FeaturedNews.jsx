@@ -14,7 +14,9 @@ import fallbackArticleCover from "/images/default-news-cover.jpg";
 const FeaturedNews = ({ variant, article, isFetching }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   if (isFetching) return <FeaturedNewsSkeleton variant={variant} />;
+
   const { id, source, author, title, description, urlToImage, publishedAt } = article;
 
   const titleClasses = classnames("font-semibold mb-3", {
@@ -24,7 +26,7 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
   });
 
   const wrapperClasses = classnames("relative cursor-pointer select-none", {
-    "row-span-2": variant === "big",
+    "row-span-2 h-[510px]": variant === "big",
     "w-full h-[250px]": variant === "wide",
     "w-1/2 h-full": variant === "small",
   });

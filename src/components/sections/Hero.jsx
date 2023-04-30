@@ -1,25 +1,30 @@
 import { useSelector } from "react-redux";
 import { useGetMainArticlesQuery } from "../../features/api/apiSlice";
+import { setHeroSectionTitle } from "../../helpers/articles";
 import CenterContent from "../layout/CenterContent";
 import SnackBar from "../ui/SnackBar";
 import FeaturedNews from "../ui/cards/FeaturedNews";
 
 const Hero = () => {
-  const { queryLanguage, selectedCategory, limit, selectedPublisher } = useSelector(
+  const { queryLanguage, selectedCategory, limit, selectedPublisher, searchKeyword } = useSelector(
     (state) => state.articles
   );
   const { isFetching, data, error, isError } = useGetMainArticlesQuery({
     country: queryLanguage,
     category: selectedCategory,
     limit,
-    source: selectedPublisher,
+    source: selectedPublisher?.id,
+    searchKeyword,
   });
 
-  const title =
-    selectedCategory === "trending"
-      ? `Featured ${selectedCategory} stories`
-      : `Featured stories in ${selectedCategory}`;
-  if (isError) return <SnackBar message={error?.data?.message || error.error} />;
+  const title = setHeroSectionTitle(selectedPublisher?.name, selectedCategory, searchKeyword);
+
+  if (isError)
+    return (
+      <div className="flex justify-center">
+        <SnackBar message={error?.data?.message || error.error} />
+      </div>
+    );
 
   return (
     <section>

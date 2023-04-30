@@ -1,7 +1,12 @@
+import { useEffect, useState } from "react";
 import { CgSearch } from "react-icons/cg";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { setCategory, setQueryLanguage } from "../../features/articles/articlesSlice";
+import {
+  setCategory,
+  setQueryLanguage,
+  setSearchKeyword,
+} from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
 import franceFlag from "/images/france-flag.png";
 import ukFlag from "/images/united-kingdom-flag.png";
@@ -10,7 +15,9 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { queryLanguage, selectedCategory } = useSelector((state) => state.articles);
+
+  const { queryLanguage, selectedCategory, searchKeyword } = useSelector((state) => state.articles);
+  const [keyword, setKeyword] = useState(searchKeyword);
 
   const handleSelectLanguage = (language) => {
     dispatch(setQueryLanguage(language));
@@ -21,6 +28,18 @@ const Navbar = () => {
     dispatch(setCategory(category));
     if (pathname !== "/") navigate("/");
   };
+
+  const handleChange = (event) => {
+    setKeyword(event.target.value);
+  };
+
+  const handleSearch = () => {
+    dispatch(setSearchKeyword(keyword));
+  };
+
+  useEffect(() => {
+    if (!searchKeyword) setKeyword("");
+  }, [searchKeyword]);
 
   const selectedCategoryClassNames = "text-yellow-700 border-b-current pb-3 border-b-[3px]";
   const categories = ["trending", "health", "business", "sports", "technology"];
@@ -37,9 +56,14 @@ const Navbar = () => {
               <input
                 type="text"
                 className="w-full h-full pl-3 border border-gray-400 rounded-tl-lg rounded-bl-lg outline-none placeholder:text-gray-400"
+                onChange={handleChange}
+                value={keyword}
                 placeholder="Search articles..."
               />
-              <button className="h-full px-4 text-xl text-white bg-primary rounded-tr-lg rounded-br-lg">
+              <button
+                className="h-full px-4 text-xl text-white bg-primary rounded-tr-lg rounded-br-lg"
+                onClick={handleSearch}
+              >
                 <CgSearch />
               </button>
             </div>
@@ -59,7 +83,6 @@ const Navbar = () => {
                 <img src={franceFlag} alt="France flag" className="inline mr-2 w-[18px]" />
                 French
               </button>
-              <span></span>
             </div>
           </div>
         </div>

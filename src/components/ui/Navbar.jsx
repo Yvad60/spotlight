@@ -3,6 +3,7 @@ import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import classNames from "classnames";
 import { useState } from "react";
 import { setCategory, setQueryLanguage } from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
@@ -17,7 +18,6 @@ const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const { queryLanguage, selectedCategory } = useSelector((state) => state.articles);
-  const selectedCategoryClassNames = "text-yellow-700 border-b-current pb-3 border-b-[3px]";
   const categories = ["trending", "health", "business", "sports", "technology"];
 
   const handleSelectLanguage = (language) => {
@@ -32,6 +32,12 @@ const Navbar = () => {
 
   const toggleNav = () => setIsNavOpen(!isNavOpen);
 
+  const setCategoryClasses = (category) =>
+    classNames("capitalize cursor-pointer  hover:bg-[#f4efea] px-2 pt-2", {
+      "text-yellow-700 border-b-current pb-3 border-b-[3px]": category === selectedCategory,
+      "pb-2": category !== selectedCategory,
+    });
+
   return (
     <header className="sticky top-0 z-50 pt-5 pb-2 shadow-md bg-light">
       <CenterContent>
@@ -40,7 +46,7 @@ const Navbar = () => {
             Spotlight
           </Link>
 
-          <nav className="md:hidden text-center" onClick={toggleNav}>
+          <nav className="text-center md:hidden" onClick={toggleNav}>
             {isNavOpen ? <GrClose className="text-[26px]" /> : <FiMenu className="text-3xl" />}
           </nav>
 
@@ -49,7 +55,7 @@ const Navbar = () => {
             <SearchInput />
             <div>
               <button
-                className={queryLanguage === "us" && "text-yellow-700 font-semibold"}
+                className={queryLanguage === "us" ? "text-yellow-700 font-semibold" : ""}
                 onClick={() => handleSelectLanguage("us")}
               >
                 <img src={ukFlag} alt="UK flag" className="inline mr-2 w-[18px]" />
@@ -58,7 +64,7 @@ const Navbar = () => {
               <span className="mx-2"> | </span>
               <button
                 onClick={() => handleSelectLanguage("fr")}
-                className={queryLanguage === "fr" && "text-yellow-600 font-semibold"}
+                className={queryLanguage === "fr" ? "text-yellow-600 font-semibold" : ""}
               >
                 <img src={franceFlag} alt="France flag" className="inline mr-2 w-[18px]" />
                 French
@@ -66,16 +72,15 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
         {isNavOpen && (
-          <div className="md:hidden flex flex-col gap-5 items-center mt-3">
+          <div className="flex flex-col items-center gap-4 mt-3 md:hidden">
             <div className="flex flex-col w-full">
-              <h3 className="font-semibold text-lg">Categories</h3>
+              <h3 className="text-lg font-semibold">Categories</h3>
               {categories.map((category, index) => (
                 <nav
                   key={index}
-                  className={`capitalize cursor-pointer w-full hover:bg-[#f4efea] px-2 py-2 ${
-                    category === selectedCategory && selectedCategoryClassNames
-                  }`}
+                  className={setCategoryClasses(category)}
                   onClick={() => selectCategory(category)}
                 >
                   {category}
@@ -85,7 +90,7 @@ const Navbar = () => {
             <SearchInput />
             <div>
               <button
-                className={queryLanguage === "us" && "text-yellow-700 font-semibold"}
+                className={queryLanguage === "us" ? "text-yellow-700 font-semibold" : ""}
                 onClick={() => handleSelectLanguage("us")}
               >
                 <img src={ukFlag} alt="UK flag" className="inline mr-2 w-[18px]" />
@@ -94,7 +99,7 @@ const Navbar = () => {
               <span className="mx-2"> | </span>
               <button
                 onClick={() => handleSelectLanguage("fr")}
-                className={queryLanguage === "fr" && "text-yellow-600 font-semibold"}
+                className={queryLanguage === "fr" ? "text-yellow-600 font-semibold" : ""}
               >
                 <img src={franceFlag} alt="France flag" className="inline mr-2 w-[18px]" />
                 French
@@ -107,9 +112,7 @@ const Navbar = () => {
           {categories.map((category, index) => (
             <nav
               key={index}
-              className={`capitalize cursor-pointer hover:bg-[#f4efea] px-2 ${
-                category === selectedCategory && selectedCategoryClassNames
-              }`}
+              className={setCategoryClasses(category)}
               onClick={() => selectCategory(category)}
             >
               {category}

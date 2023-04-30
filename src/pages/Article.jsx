@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
+import { IoMdArrowDropright } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import CenterContent from "../components/layout/CenterContent";
@@ -15,29 +16,32 @@ const Article = () => {
   const [isMessageVisible, setIsMessageVisible] = useState(false);
 
   if (!id) return <Navigate to="/" />;
+
   return (
-    <div className="flex-1 mt-4 bg-light mb-12">
+    <div className="flex-1 mt-4 mb-12 bg-light">
       <CenterContent size="medium">
-        <div className="w-full h-[50vh]">
+        <div className="w-full bg-red-500 h-[50vw] md:h-[50vh]">
           <img
             src={urlToImage || fallbackArticleCover}
             alt=""
             className="object-cover object-top w-full h-full rounded-sm"
           />
         </div>
-        <h1 className="w-11/12 mt-5 text-5xl font-semibold">{removePublisherFromTitle(title)}</h1>
-        <div className="mt-5">
+        <h1 className="w-11/12 mt-5 text-xl sm:text-2xl font-semibold md:text-5xl">
+          {removePublisherFromTitle(title)}
+        </h1>
+        <div className="mt-4 md:mt-5">
           <p>{description || content}</p>
         </div>
-        <div className="flex justify-between mt-4">
+        <div className="flex flex-col md:flex-row justify-between mt-4">
           <div className="flex items-center gap-3">
-            <FaUser className="text-3xl text-zinc-600" />
-            <div className="flex flex-col justify-center">
-              <h5 className="font-semibold">{author || "Anonymous"}</h5>
+            <FaUser className="text-2xl sm:text-3xl text-zinc-600 flex-shrink-0" />
+            <div className="flex flex-col justify-center overflow-hidden">
+              <h5 className="font-semibold w-full">{author || "Anonymous"}</h5>
               <h5 className="font-semibold">{source.name}</h5>
             </div>
           </div>
-          <div className="text-right">
+          <div className="mt-3 md:mt-0 md:text-right">
             <p>{normalizeDate(publishedAt)}</p>
             {readingMinutes && (
               <p>
@@ -51,15 +55,16 @@ const Article = () => {
           href={url}
           target="_blank"
           rel="noreferrer"
-          className="px-6 py-2 inline-block font-semibold mt-10 rounded-md bg-primary text-light"
+          className="inline-block px-6 py-2 mt-10 font-semibold rounded-md bg-primary text-light"
         >
           View orginal source
         </a>
         <div className={`transition-all duration-300 ${isMessageVisible && "relative mb-28"}`}>
           <p
-            className="text-[13px] mt-2 border-b-2 border-dotted border-current w-fit cursor-pointer"
+            className="mt-2 border-b-2 border-current border-dotted cursor-pointer text-[13px] w-fit"
             onMouseOver={() => setIsMessageVisible(true)}
           >
+            <IoMdArrowDropright />
             Why you can't read the article here?
           </p>
           <div

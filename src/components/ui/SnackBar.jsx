@@ -4,7 +4,7 @@ import { IoCloseCircleSharp } from "react-icons/io5";
 const SnackBar = ({ message, variant }) => {
   return (
     <div className="flex-1 max-w-[900px] justify-self-center items-center">
-      <div className="bg-[#cbe6f1] p-5 rounded flex gap-5 items-center">
+      <div className="bg-[#cbe6f1] p-3 sm:p-5 rounded flex gap-3 sm:gap-5 items-center">
         {variant === "info" ? (
           <AiOutlineInfoCircle className="text-2xl flex-shrink-0" />
         ) : (

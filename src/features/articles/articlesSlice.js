@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   queryLanguage: "us",
   selectedCategory: "trending",
-  limit: 11,
+  limit: 10,
   selectedPublisher: null,
   searchKeyword: "",
 };

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useGetAllPublishersQuery, useGetMainArticlesQuery } from "../../features/api/apiSlice";
+import { useGetAllPublishersQuery } from "../../features/api/apiSlice";
 import { selectPublisher } from "../../features/articles/articlesSlice";
 import {
   capitalize,
@@ -7,33 +7,24 @@ import {
   getLanguageFromCode,
   setMoreNewsSectionTitle,
 } from "../../helpers/articles";
+import useMainArticlesFetch from "../../hooks/useMainArticlesFetch";
 import CenterContent from "../layout/CenterContent";
 import NewsCardSkeleton from "../skeletons/News";
 import NewsCard from "../ui/cards/News";
 
 const MoreNews = () => {
   const dispatch = useDispatch();
-  const { queryLanguage, selectedCategory, limit, selectedPublisher, searchKeyword } = useSelector(
+  const { selectedCategory, selectedPublisher, searchKeyword } = useSelector(
     (state) => state.articles
   );
-  const { isFetching, data, error, isError } = useGetMainArticlesQuery({
-    country: queryLanguage,
-    source: selectedPublisher?.id,
-    category: selectedCategory,
-    limit,
-    searchKeyword,
-  });
-
-  const { data: publishers, error: pubError } = useGetAllPublishersQuery();
+  const { isFetching, data } = useMainArticlesFetch();
+  const { data: publishers } = useGetAllPublishersQuery();
 
   const handleSelectPublisher = (publisher) => dispatch(selectPublisher(publisher));
-
   const resetPublishers = (event) => {
     event.stopPropagation();
     dispatch(selectPublisher(""));
   };
-
-  if (isError) return null;
 
   return (
     <section className="mt-10">
@@ -50,7 +41,7 @@ const MoreNews = () => {
 
             {!isFetching &&
               data &&
-              data.slice(5).map((article, index) => <NewsCard article={article} key={index} />)}
+              data.slice(4).map((article, index) => <NewsCard article={article} key={index} />)}
           </div>
 
           <div className="flex-shrink-0 w-[300px] grow-0">

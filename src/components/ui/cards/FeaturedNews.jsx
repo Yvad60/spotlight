@@ -15,10 +15,6 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  if (isFetching) return <FeaturedNewsSkeleton variant={variant} />;
-
-  const { id, source, author, title, description, urlToImage, publishedAt } = article;
-
   const titleClasses = classnames("font-semibold mb-3 line-clamp-3", {
     "text-xl sm:text-2xl md:text-4xl": variant === "big",
     "text-xl sm:text-2xl md:text-3xl": variant === "wide",
@@ -37,6 +33,10 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
       "text-sm line-clamp-1": variant === "small",
     }
   );
+
+  if (isFetching) return <FeaturedNewsSkeleton variant={variant} styles={{ wrapperClasses }} />;
+
+  const { id, source, author, title, description, urlToImage, publishedAt } = article;
 
   const viewArticle = () => {
     dispatch(setSelectedArticle(article));

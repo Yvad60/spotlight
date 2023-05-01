@@ -15,7 +15,7 @@ const Hero = () => {
   return (
     <section>
       <CenterContent>
-        <h3 className="mt-7 mb-5 text-2xl font-bold">{title}</h3>
+        <h3 className="mt-4 md:mt-7 mb-5 text-xl sm:text-2xl font-bold">{title}</h3>
         <div className="grid w-full grid-cols-1 md:grid-cols-2 gap-5 md:gap-[10px]">
           <FeaturedNews variant="big" article={data && data[0]} isFetching={isFetching} />
           <FeaturedNews variant="wide" article={data && data[1]} isFetching={isFetching} />

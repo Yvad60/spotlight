@@ -20,7 +20,7 @@ const Article = () => {
   return (
     <div className="flex-1 mt-4 mb-12 bg-light">
       <CenterContent size="medium">
-        <div className="w-full bg-red-500 h-[50vw] md:h-[50vh]">
+        <div className="w-full h-[50vw] md:h-[50vh]">
           <img
             src={urlToImage || fallbackArticleCover}
             alt=""

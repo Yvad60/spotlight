@@ -1,20 +1,14 @@
 import classnames from "classnames";
 
-const FeaturedNews = ({ variant }) => {
+const FeaturedNews = ({ variant, styles }) => {
   const titleClasses = classnames("bg-[#b9a18d] animate-pulse", {
-    "h-7 rounded": variant === "big",
-    "h-5 rounded": variant === "wide",
-    "h-4 rounded": variant === "small",
-  });
-
-  const wrapperClasses = classnames("relative border border-gray-300 rounded", {
-    "row-span-2": variant === "big",
-    "w-full h-[250px]": variant === "wide",
-    "w-1/2 h-full": variant === "small",
+    "h-4 md:h-7 rounded": variant === "big",
+    "h-4 md:h-5 rounded": variant === "wide",
+    "h-4 md:h-4 rounded": variant === "small",
   });
 
   return (
-    <div className={wrapperClasses}>
+    <div className={`border border-gray-300 ${styles.wrapperClasses}`}>
       <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 bg-gradient-to-b from-transparent rounded to-yellow-900 bg-opacity-5">
         <div className="flex flex-col gap-4 mb-6">
           <div className={`w-full ${titleClasses}`}></div>
@@ -22,7 +16,7 @@ const FeaturedNews = ({ variant }) => {
         </div>
 
         {variant === "big" && (
-          <div className="flex flex-col mt-3 mb-4 gap-[10px] animate-pulse">
+          <div className="hidden md:flex flex-col mt-3 mb-4 gap-[10px] animate-pulse">
             <div className="w-full h-4 bg-[#a58c74] rounded"></div>
             <div className="w-10/12 h-4 bg-[#a58c74] rounded"></div>
           </div>

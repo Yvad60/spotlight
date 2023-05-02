@@ -6,7 +6,7 @@ import { IoLanguage } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useFetchPublishersQuery } from "../../features/api/apiSlice";
 import { selectPublisher } from "../../features/articles/articlesSlice";
-import { capitalize, getCountryFromCode, getLanguageFromCode } from "../../helpers/articles";
+import { getCountryFromCode, getLanguageFromCode } from "../../helpers/articles";
 import PublisherRowSkeleton from "../skeletons/PublisherRow";
 
 const Publishers = () => {
@@ -22,7 +22,7 @@ const Publishers = () => {
   };
 
   const badgeClasses = classNames(
-    "px-2 flex items-center border rounded-full gap-[2px] md:py-[1px] border-gray-300 w-18 sm:w-auto"
+    "px-2 capitalize flex items-center border rounded-full gap-[2px] md:py-[1px] border-gray-300 w-18 sm:w-auto"
   );
   const setPublisherWrapperClasses = (publisher) =>
     classNames("pb-2 pt-1 md:pt-2 md:pb-3 px-2 cursor-pointer text-slate-600 hover:bg-[#f1eee8]", {
@@ -69,7 +69,7 @@ const Publishers = () => {
                     <div className="flex gap-2 mt-[2px] md:mt-1 text-[12px]">
                       <p className={badgeClasses}>
                         <BiCategoryAlt className="hidden sm:inline" />
-                        {capitalize(publisher.category)}
+                        {publisher.category}
                       </p>
                       <p className={badgeClasses}>
                         <BsGlobe className="hidden sm:inline" />{" "}

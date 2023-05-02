@@ -37,8 +37,6 @@ export const getLanguageFromCode = (languageCode) => {
   return languageNamesInEnglish.of(languageCode.toUpperCase());
 };
 
-export const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
-
 export const setHeroSectionTitle = (selectedPublisher, selectedCategory, searchKeyword) => {
   if (searchKeyword) return `Featured news about "${searchKeyword}"`;
   if (selectedPublisher) return `Featured news from ${selectedPublisher}`;

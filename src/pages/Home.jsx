@@ -1,22 +1,28 @@
+import { unfoundArticlesMessage } from "../common/articles";
 import Hero from "../components/sections/Hero";
 import MoreNews from "../components/sections/MoreNews";
 import SnackBar from "../components/ui/SnackBar";
-import useMainArticlesFetch from "../hooks/useMainArticlesFetch";
+import useArticlesFetch from "../hooks/useMainArticlesFetch";
 
 const Home = () => {
-  const { isFetching, isError, data, error } = useMainArticlesFetch();
+  const { isFetching, isError, data, error } = useArticlesFetch();
 
   if (!isFetching && isError)
     return (
-      <div className="flex justify-center items-center flex-1 px-3">
+      <div className="flex items-center justify-center flex-1 px-3">
         <SnackBar message={error?.data?.message || error.error} variant="error" />
       </div>
     );
 
-  if (!isFetching && data && data.length <= 0) return <p>No article found</p>;
+  if (!isFetching && data && data.length <= 0)
+    return (
+      <div className="flex items-center justify-center flex-1 px-3">
+        <SnackBar message={unfoundArticlesMessage} variant="info" />
+      </div>
+    );
 
   return (
-    <main className="text-yellow-950 bg-light flex-1 flex flex-col mb-12">
+    <main className="flex flex-col flex-1 mb-12 text-yellow-950 bg-light">
       <Hero />
       <MoreNews />
     </main>

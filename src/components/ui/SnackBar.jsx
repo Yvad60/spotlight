@@ -9,12 +9,12 @@ const SnackBar = ({ message, variant, title }) => {
   });
 
   return (
-    <div className="flex-1 max-w-[900px] justify-self-center items-center">
+    <div className="items-center flex-1 max-w-[900px] justify-self-center">
       <div className={wrapperClasses}>
-        {variant === "info" && <AiOutlineInfoCircle className="text-2xl flex-shrink-0" />}
-        {variant === "error" && <IoCloseCircleSharp className="text-2xl flex-shrink-0" />}
+        {variant === "info" && <AiOutlineInfoCircle className="flex-shrink-0 text-2xl" />}
+        {variant === "error" && <IoCloseCircleSharp className="flex-shrink-0 text-2xl" />}
         <div>
-          <h4 className="font-bold mb-1"> {title || "Heads up"} </h4>
+          <h4 className="mb-1 font-bold"> {title || "Heads up"} </h4>
           <p className="text-sm">{message}</p>
         </div>
       </div>

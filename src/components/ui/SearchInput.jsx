@@ -21,7 +21,7 @@ const SearchInput = () => {
   }, [searchKeyword]);
 
   return (
-    <div className="flex h-10 max-w-2xl w-full md:w-[320px]">
+    <div className="flex w-full h-10 max-w-2xl md:w-[320px]">
       <input
         type="text"
         className="w-full h-full pl-3 border border-gray-400 rounded-tl-lg rounded-bl-lg outline-none placeholder:text-gray-400"

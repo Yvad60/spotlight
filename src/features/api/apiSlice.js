@@ -5,12 +5,12 @@ const { VITE_API_BASE_URL, VITE_API_KEY } = import.meta.env;
 
 const withApiKey = (query) => `${query}&apiKey=${VITE_API_KEY}`;
 
-const addArticlesIds = (articles) => articles.map((article) => ({ id: nanoid(), ...article }));
+const articlesWithIds = (articles) => articles.map((article) => ({ id: nanoid(), ...article }));
 
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: VITE_API_BASE_URL }),
   endpoints: (builder) => ({
-    getMainArticles: builder.query({
+    fetchArticles: builder.query({
       query: (args) => {
         const { country, category, limit, source, searchKeyword } = args;
         if (searchKeyword)
@@ -23,25 +23,17 @@ const apiSlice = createApi({
         );
       },
       transformResponse: (response) => {
-        if (response.articles) return addArticlesIds(response.articles);
+        if (response.articles) return articlesWithIds(response.articles);
       },
     }),
 
-    getArticlesByPublisher: builder.query({
-      query: (publisher) => withApiKey(`/top-headlines?sources=${publisher}`),
-    }),
-
-    getAllPublishers: builder.query({
+    fetchPublishers: builder.query({
       query: () => withApiKey("/top-headlines/sources?"),
       transformResponse: (response) => response.sources,
     }),
   }),
 });
 
-export const {
-  useGetMainArticlesQuery,
-  useLazyGetArticlesByPublisherQuery,
-  useGetAllPublishersQuery,
-} = apiSlice;
+export const { useFetchArticlesQuery, useFetchPublishersQuery } = apiSlice;
 
 export default apiSlice;

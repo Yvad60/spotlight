@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { setMoreNewsSectionTitle } from "../../helpers/articles";
 import useMainArticlesFetch from "../../hooks/useMainArticlesFetch";
 import CenterContent from "../layout/CenterContent";
-import NewsCardSkeleton from "../skeletons/News";
+import NewsCardSkeleton from "../skeletons/NewsCard";
 import Publishers from "../ui/Publishers";
 import NewsCard from "../ui/cards/News";
 
@@ -15,7 +15,7 @@ const MoreNews = () => {
   return (
     <section className="mt-6 md:mt-10">
       <CenterContent>
-        <h3 className="mb-6 text-xl sm:text-2xl font-bold">
+        <h3 className="mb-6 text-xl font-bold sm:text-2xl">
           {setMoreNewsSectionTitle(selectedPublisher?.name, selectedCategory, searchKeyword)}
         </h3>
         <div className="flex gap-16">

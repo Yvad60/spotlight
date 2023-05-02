@@ -3,6 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { IoMdArrowDropright } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { missingContentMessage } from "../common/articles";
 import CenterContent from "../components/layout/CenterContent";
 import SnackBar from "../components/ui/SnackBar";
 import { countReadingMinutes, normalizeDate, removePublisherFromTitle } from "../helpers/articles";
@@ -14,6 +15,7 @@ const Article = () => {
   const readingMinutes = content ? countReadingMinutes(content) : null;
 
   const [isMessageVisible, setIsMessageVisible] = useState(false);
+  const toggleMessage = () => setIsMessageVisible(!isMessageVisible);
 
   if (!id) return <Navigate to="/" />;
 
@@ -27,17 +29,17 @@ const Article = () => {
             className="object-cover object-top w-full h-full rounded-sm"
           />
         </div>
-        <h1 className="w-11/12 mt-5 text-xl sm:text-2xl font-semibold md:text-5xl">
+        <h1 className="w-11/12 mt-5 text-xl font-semibold sm:text-2xl md:text-5xl">
           {removePublisherFromTitle(title)}
         </h1>
         <div className="mt-4 md:mt-5">
           <p>{description || content}</p>
         </div>
-        <div className="flex flex-col md:flex-row justify-between mt-4">
+        <div className="flex flex-col justify-between mt-4 md:flex-row">
           <div className="flex items-center gap-3">
-            <FaUser className="text-2xl sm:text-3xl text-zinc-600 flex-shrink-0" />
+            <FaUser className="flex-shrink-0 text-2xl sm:text-3xl text-zinc-600" />
             <div className="flex flex-col justify-center overflow-hidden">
-              <h5 className="font-semibold w-full">{author || "Anonymous"}</h5>
+              <h5 className="w-full font-semibold">{author || "Anonymous"}</h5>
               <h5 className="font-semibold">{source.name}</h5>
             </div>
           </div>
@@ -59,23 +61,24 @@ const Article = () => {
         >
           View orginal source
         </a>
+
         <div className={`transition-all duration-300 ${isMessageVisible && "relative mb-28"}`}>
-          <p
-            className="mt-2 border-b-2 border-current border-dotted cursor-pointer text-[13px] w-fit"
-            onMouseOver={() => setIsMessageVisible(true)}
-          >
-            <IoMdArrowDropright />
-            Why you can't read the article here?
-          </p>
+          <div className="mt-3 cursor-pointer flex text-[13px] w-fit" onClick={toggleMessage}>
+            <IoMdArrowDropright
+              className={`text-2xl transition-transform duration-150 ease-in ${
+                isMessageVisible ? "rotate-90" : ""
+              }`}
+            />
+            <p className="border-b-2 border-current border-dotted">
+              Why you can't read the article here?
+            </p>
+          </div>
           <div
             className={`mt-4 transition-all  ${
               isMessageVisible ? "opacity-100 duration-300 h-auto absolute" : "opacity-0 h-0"
             }`}
           >
-            <SnackBar
-              variant="info"
-              message="This page is supposed to display the full text of the article, however, the news API used for this project does not deliver the full text of the article. That’s why you are only seeing an article summary. Clicking the 'Read full article' button will redirect you to the orginal article"
-            />
+            <SnackBar variant="info" message={missingContentMessage} />
           </div>
         </div>
       </CenterContent>

@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import { useGetMainArticlesQuery } from "../features/api/apiSlice";
+import { useFetchArticlesQuery } from "../features/api/apiSlice";
 
-const useMainArticlesFetch = () => {
+const useArticlesFetch = () => {
   const { queryLanguage, selectedCategory, limit, selectedPublisher, searchKeyword } = useSelector(
     (state) => state.articles
   );
 
-  const { data, isError, isFetching, isLoading, isSuccess, error } = useGetMainArticlesQuery({
+  const { data, isError, isFetching, isLoading, isSuccess, error } = useFetchArticlesQuery({
     country: queryLanguage,
     source: selectedPublisher?.id,
     category: selectedCategory,
@@ -17,4 +17,4 @@ const useMainArticlesFetch = () => {
   return { data, isError, isFetching, isLoading, isSuccess, error };
 };
 
-export default useMainArticlesFetch;
+export default useArticlesFetch;

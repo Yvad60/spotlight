@@ -1,6 +1,6 @@
 import classnames from "classnames";
 
-const FeaturedNews = ({ variant, styles }) => {
+const FeaturedNewsCard = ({ variant, styles }) => {
   const titleClasses = classnames("bg-[#b9a18d] animate-pulse", {
     "h-4 md:h-7 rounded": variant === "big",
     "h-4 md:h-5 rounded": variant === "wide",
@@ -9,14 +9,14 @@ const FeaturedNews = ({ variant, styles }) => {
 
   return (
     <div className={`border border-gray-300 ${styles.wrapperClasses}`}>
-      <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 bg-gradient-to-b from-transparent rounded to-yellow-900 bg-opacity-5">
+      <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 rounded bg-gradient-to-b from-transparent to-yellow-900 bg-opacity-5">
         <div className="flex flex-col gap-4 mb-6">
           <div className={`w-full ${titleClasses}`}></div>
           <div className={`w-1/2 ${titleClasses}`}></div>
         </div>
 
         {variant === "big" && (
-          <div className="hidden md:flex flex-col mt-3 mb-4 gap-[10px] animate-pulse">
+          <div className="flex-col hidden mt-3 mb-4 md:flex gap-[10px] animate-pulse">
             <div className="w-full h-4 bg-[#a58c74] rounded"></div>
             <div className="w-10/12 h-4 bg-[#a58c74] rounded"></div>
           </div>
@@ -33,4 +33,4 @@ const FeaturedNews = ({ variant, styles }) => {
   );
 };
 
-export default FeaturedNews;
+export default FeaturedNewsCard;

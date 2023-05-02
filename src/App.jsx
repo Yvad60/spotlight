@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 
 const App = () => {
   return (
-    <div className="bg-light flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-light">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

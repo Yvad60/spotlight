@@ -8,7 +8,7 @@ import {
   normalizeDate,
   removePublisherFromTitle,
 } from "../../../helpers/articles";
-import FeaturedNewsSkeleton from "../../skeletons/FeaturedNews";
+import FeaturedNewsSkeleton from "../../skeletons/FeaturedNewsCard";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 
 const FeaturedNews = ({ variant, article, isFetching }) => {

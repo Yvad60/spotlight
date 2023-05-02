@@ -67,7 +67,6 @@ const Navbar = () => {
             {isNavOpen ? <GrClose className="text-[26px]" /> : <FiMenu className="text-3xl" />}
           </nav>
 
-          {/* Desktop */}
           <div className="items-center hidden gap-6 md:flex">
             <SearchInput />
             <div>
@@ -98,7 +97,11 @@ const Navbar = () => {
                 onClick={toggleCategories}
               >
                 <h3 className="text-lg font-bold">Categories</h3>
-                <FiChevronDown className="text-2xl" />
+                <FiChevronDown
+                  className={`text-2xl transition-transform duration-100 ease-in ${
+                    categoriesOpen ? "rotate-180" : ""
+                  }`}
+                />
               </div>
 
               {categoriesOpen &&
@@ -118,10 +121,14 @@ const Navbar = () => {
 
             <div className="flex justify-between py-2 w-full border-b-2" onClick={togglePublishers}>
               <h3 className="text-lg font-bold">Available publishers</h3>
-              <FiChevronDown className="text-2xl" />
+              <FiChevronDown
+                className={`text-2xl transition-transform duration-100 ease-in ${
+                  publishersOpen ? "rotate-180" : ""
+                }`}
+              />
             </div>
             {publishersOpen && (
-              <div className="h-[32vh] bg-light w-full">
+              <div className="h-[32vh] bg-light w-full transition-all duration-1000">
                 <Publishers />
               </div>
             )}

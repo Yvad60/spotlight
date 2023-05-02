@@ -22,9 +22,9 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
   });
 
   const wrapperClasses = classnames("relative cursor-pointer select-none", {
-    "h-[220px] md:row-span-2 md:h-[510px]": variant === "big",
+    "h-[220px] md:h-auto lg:row-span-2 lg:h-[510px]": variant === "big",
     "w-full h-[220px] md:h-[250px]": variant === "wide",
-    "h-[220px] w-full md:w-1/2 md:h-full": variant === "small",
+    "h-[220px] w-full lg:w-1/2 md:h-full": variant === "small",
   });
 
   const footerClasses = classnames(
@@ -52,7 +52,7 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
         <h3 className={titleClasses}>{removePublisherFromTitle(title)}</h3>
 
         {variant === "big" && (
-          <p className="hidden mb-4 text-lg md:block text-yellow-50">{description}</p>
+          <p className="hidden mb-4 text-lg lg:block text-yellow-50">{description}</p>
         )}
 
         <div className={footerClasses}>

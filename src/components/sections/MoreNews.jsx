@@ -13,7 +13,7 @@ const MoreNews = () => {
   const { isFetching, data } = useMainArticlesFetch();
 
   return (
-    <section className="mt-10">
+    <section className="mt-6 md:mt-10">
       <CenterContent>
         <h3 className="mb-6 text-xl sm:text-2xl font-bold">
           {setMoreNewsSectionTitle(selectedPublisher?.name, selectedCategory, searchKeyword)}

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { setMoreNewsSectionTitle } from "../../helpers/articles";
-import useMainArticlesFetch from "../../hooks/useMainArticlesFetch";
+import useArticlesFetch from "../../hooks/useArticlesFetch";
 import CenterContent from "../layout/CenterContent";
 import NewsCardSkeleton from "../skeletons/NewsCard";
 import Publishers from "../ui/Publishers";
@@ -10,7 +10,7 @@ const MoreNews = () => {
   const { selectedCategory, selectedPublisher, searchKeyword } = useSelector(
     (state) => state.articles
   );
-  const { isFetching, data } = useMainArticlesFetch();
+  const { isFetching, data } = useArticlesFetch();
 
   return (
     <section className="mt-6 md:mt-10">

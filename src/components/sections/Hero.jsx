@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { setHeroSectionTitle } from "../../helpers/articles";
-import useArticlesFetch from "../../hooks/useMainArticlesFetch";
+import useArticlesFetch from "../../hooks/useArticlesFetch";
 import CenterContent from "../layout/CenterContent";
 import FeaturedNews from "../ui/cards/FeaturedNews";
 

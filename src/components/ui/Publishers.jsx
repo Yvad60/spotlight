@@ -7,11 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetAllPublishersQuery } from "../../features/api/apiSlice";
 import { selectPublisher } from "../../features/articles/articlesSlice";
 import { capitalize, getCountryFromCode, getLanguageFromCode } from "../../helpers/articles";
+import PublisherRowSkeleton from "../skeletons/PublisherRow";
 
 const Publishers = () => {
   const dispatch = useDispatch();
   const { selectedPublisher } = useSelector((state) => state.articles);
-  const { data } = useGetAllPublishersQuery();
+  const { data, isFetching } = useGetAllPublishersQuery();
   const [visiblePublishers, setVisiblePublishers] = useState(data);
 
   const handleSelectPublisher = (publisher) => dispatch(selectPublisher(publisher));
@@ -49,7 +50,13 @@ const Publishers = () => {
       />
       <div className="h-full w-full mt-2 overflow-hidden rounded-lg shadow md:border">
         <div className="divide-y-2 divide-zinc-300 overflow-y-auto h-full max-h-[600px] relative scrollbar-thumb-[#8d6a43] hover:scrollbar-thumb-[#725738] scrollbar-track-[#EBE1D7] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-w-8">
-          {visiblePublishers &&
+          {isFetching &&
+            Array(8)
+              .fill(0)
+              .map((_item, index) => <PublisherRowSkeleton key={index} />)}
+
+          {!isFetching &&
+            visiblePublishers &&
             visiblePublishers.map((publisher) => (
               <div
                 onClick={() => handleSelectPublisher(publisher)}

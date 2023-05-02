@@ -3,11 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSelectedArticle } from "../../../features/articles/articlesSlice";
-import {
-  normalizeAuthors,
-  normalizeDate,
-  removePublisherFromTitle,
-} from "../../../helpers/articles";
+import { normalizeAuthors } from "../../../helpers/articles";
 import FeaturedNewsSkeleton from "../../skeletons/FeaturedNewsCard";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 
@@ -49,7 +45,7 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
         {source.name}
       </h3>
       <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 rounded-sm bg-gradient-to-b from-transparent to-yellow-900 bg-opacity-5 text-light">
-        <h3 className={titleClasses}>{removePublisherFromTitle(title)}</h3>
+        <h3 className={titleClasses}>{title}</h3>
 
         {variant === "big" && (
           <p className="hidden mb-4 text-lg lg:block text-yellow-50">{description}</p>
@@ -60,7 +56,7 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
             <FaUser className="text-base sm:text-xl" />
             {(author && normalizeAuthors(author)) || "Anonymous"}
           </h4>
-          <h4 className="text-sm sm:text-base">{normalizeDate(publishedAt)}</h4>
+          <h4 className="text-sm sm:text-base">{publishedAt}</h4>
         </div>
       </div>
       <img

@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 import { missingContentMessage } from "../common/articles";
 import CenterContent from "../components/layout/CenterContent";
 import SnackBar from "../components/ui/SnackBar";
-import { countReadingMinutes, normalizeDate, removePublisherFromTitle } from "../helpers/articles";
+import { countReadingMinutes } from "../helpers/articles";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 
 const Article = () => {
@@ -29,9 +29,7 @@ const Article = () => {
             className="object-cover object-top w-full h-full rounded-sm"
           />
         </div>
-        <h1 className="w-11/12 mt-5 text-xl font-semibold sm:text-2xl md:text-5xl">
-          {removePublisherFromTitle(title)}
-        </h1>
+        <h1 className="w-11/12 mt-5 text-xl font-semibold sm:text-2xl md:text-5xl">{title}</h1>
         <div className="mt-4 md:mt-5">
           <p>{description || content}</p>
         </div>
@@ -44,7 +42,7 @@ const Article = () => {
             </div>
           </div>
           <div className="mt-3 md:mt-0 md:text-right">
-            <p>{normalizeDate(publishedAt)}</p>
+            <p>{publishedAt}</p>
             {readingMinutes && (
               <p>
                 {readingMinutes <= 1 ? "Less than a minute read" : `${readingMinutes} minutes read`}

@@ -20,14 +20,11 @@ const MoreNews = () => {
         </h3>
         <div className="flex gap-16">
           <div className="grid w-full grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
-            {isFetching &&
-              Array(6)
-                .fill(0)
-                .map((_item, index) => <NewsCardSkeleton key={index} />)}
-
-            {!isFetching &&
-              data &&
-              data.slice(4).map((article, index) => <NewsCard article={article} key={index} />)}
+            {isFetching
+              ? Array(6)
+                  .fill(0)
+                  .map((_item, index) => <NewsCardSkeleton key={index} />)
+              : data?.slice(4).map((article, index) => <NewsCard article={article} key={index} />)}
           </div>
 
           <div className="flex-shrink-0 hidden md:block w-[300px] grow-0">

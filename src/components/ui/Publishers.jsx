@@ -50,48 +50,45 @@ const Publishers = () => {
       />
       <div className="w-full h-full mt-2 overflow-hidden rounded-lg shadow md:border">
         <div className="divide-y-2 divide-zinc-300 overflow-y-auto h-full max-h-[600px] relative scrollbar-thumb-[#8d6a43] hover:scrollbar-thumb-[#725738] scrollbar-track-[#EBE1D7] scrollbar-thin scrollbar-thumb-rounded-full scrollbar-w-8">
-          {isFetching &&
-            Array(8)
-              .fill(0)
-              .map((_item, index) => <PublisherRowSkeleton key={index} />)}
-
-          {!isFetching &&
-            visiblePublishers &&
-            visiblePublishers.map((publisher) => (
-              <div
-                onClick={() => handleSelectPublisher(publisher)}
-                key={publisher.id}
-                className={setPublisherWrapperClasses(publisher)}
-              >
-                <div className="flex items-center">
-                  <div className="flex-1">
-                    <h3 className="text-sm font-semibold md:text-base">{publisher.name}</h3>
-                    <div className="flex gap-2 mt-[2px] md:mt-1 text-[12px]">
-                      <p className={badgeClasses}>
-                        <BiCategoryAlt className="hidden sm:inline" />
-                        {publisher.category}
-                      </p>
-                      <p className={badgeClasses}>
-                        <BsGlobe className="hidden sm:inline" />{" "}
-                        {getCountryFromCode(publisher.country)}
-                      </p>
-                      <p className={badgeClasses}>
-                        <IoLanguage className="hidden sm:inline" />
-                        {getLanguageFromCode(publisher.language)}
-                      </p>
+          {isFetching
+            ? Array(8)
+                .fill(0)
+                .map((_item, index) => <PublisherRowSkeleton key={index} />)
+            : visiblePublishers?.map((publisher) => (
+                <div
+                  onClick={() => handleSelectPublisher(publisher)}
+                  key={publisher.id}
+                  className={setPublisherWrapperClasses(publisher)}
+                >
+                  <div className="flex items-center">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-semibold md:text-base">{publisher.name}</h3>
+                      <div className="flex gap-2 mt-[2px] md:mt-1 text-[12px]">
+                        <p className={badgeClasses}>
+                          <BiCategoryAlt className="hidden sm:inline" />
+                          {publisher.category}
+                        </p>
+                        <p className={badgeClasses}>
+                          <BsGlobe className="hidden sm:inline" />
+                          {getCountryFromCode(publisher.country)}
+                        </p>
+                        <p className={badgeClasses}>
+                          <IoLanguage className="hidden sm:inline" />
+                          {getLanguageFromCode(publisher.language)}
+                        </p>
+                      </div>
                     </div>
+                    {publisher.id === selectedPublisher?.id && (
+                      <button
+                        onClick={resetPublishers}
+                        className="px-2 border rounded-md absolute right-0 mr-2 py-[2px] bg-[#da7077] text-light text-[11px]"
+                      >
+                        Reset
+                      </button>
+                    )}
                   </div>
-                  {publisher.id === selectedPublisher?.id && (
-                    <button
-                      onClick={resetPublishers}
-                      className="px-2 border rounded-md absolute right-0 mr-2 py-[2px] bg-[#da7077] text-light text-[11px]"
-                    >
-                      Reset
-                    </button>
-                  )}
                 </div>
-              </div>
-            ))}
+              ))}
         </div>
       </div>
     </div>

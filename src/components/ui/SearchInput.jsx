@@ -8,12 +8,8 @@ const SearchInput = () => {
   const { searchKeyword } = useSelector((state) => state.articles);
   const [keyword, setKeyword] = useState(searchKeyword);
 
-  const handleChange = (event) => {
-    setKeyword(event.target.value);
-  };
-  const handleSearch = () => {
-    dispatch(setSearchKeyword(keyword));
-  };
+  const handleChange = (event) => setKeyword(event.target.value);
+  const handleSearch = () => dispatch(setSearchKeyword(keyword));
   const searchByEnter = (event) => event.key === "Enter" && handleSearch();
 
   useEffect(() => {

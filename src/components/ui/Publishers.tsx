@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { BiCategoryAlt } from "react-icons/bi";
 import { BsGlobe } from "react-icons/bs";
 import { IoLanguage } from "react-icons/io5";
@@ -9,7 +9,7 @@ import { selectPublisher } from "../../features/articles/articlesSlice";
 import { getCountryFromCode, getLanguageFromCode } from "../../helpers/articles";
 import PublisherRowSkeleton from "../skeletons/PublisherRow";
 
-const Publishers = () => {
+const Publishers:FC = () => {
   const dispatch = useDispatch();
   const { selectedPublisher } = useSelector((state) => state.articles);
   const { data, isFetching } = useFetchPublishersQuery();

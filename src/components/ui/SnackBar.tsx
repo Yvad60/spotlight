@@ -1,8 +1,15 @@
 import classNames from "classnames";
+import { FC } from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { IoCloseCircleSharp } from "react-icons/io5";
 
-const SnackBar = ({ message, variant, title }) => {
+interface SnackBarProps {
+  message:string;
+  variant:string;
+  title?: string;
+}
+
+const SnackBar: FC<SnackBarProps> = ({ message, variant, title }) => {
   const wrapperClasses = classNames("p-3 sm:p-5 rounded flex gap-3 sm:gap-5 items-center", {
     "bg-[#cbe6f1]": variant === "info",
     "bg-[#FBE3E2]": variant === "error",

@@ -3,7 +3,7 @@ import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 import { categories } from "../../common/articles";
 import { setCategoryClasses } from "../../common/styles";
 import { setCategory } from "../../features/articles/articlesSlice";
@@ -12,7 +12,7 @@ import LanguageSelector from "./LanguageSelector";
 import MobileNav from "./MobileNav";
 import SearchInput from "./SearchInput";
 
-const Navbar = () => {
+const Navbar:FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();

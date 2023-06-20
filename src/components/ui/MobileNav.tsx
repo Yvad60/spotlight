@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { categories } from "../../common/articles";
@@ -7,7 +7,7 @@ import LanguageSelector from "./LanguageSelector";
 import Publishers from "./Publishers";
 import SearchInput from "./SearchInput";
 
-const MobileNav = ({ toggleNav, selectCategory }) => {
+const MobileNav:FC = ({ toggleNav, selectCategory }) => {
   const { selectedCategory } = useSelector((state) => state.articles);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [publishersOpen, setPublisherOpen] = useState(false);

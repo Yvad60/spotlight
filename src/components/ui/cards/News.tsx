@@ -4,8 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { setSelectedArticle } from "../../../features/articles/articlesSlice";
 import { normalizeAuthors } from "../../../helpers/articles";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
+import { FC } from "react";
 
-const News = ({ article }) => {
+interface NewsProps{
+  article: Article
+}
+
+const News:FC<NewsProps> = ({ article }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { source, author, title, urlToImage, publishedAt } = article;

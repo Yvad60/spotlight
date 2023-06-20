@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { CgSearch } from "react-icons/cg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setSearchKeyword } from "../../features/articles/articlesSlice";
+import { useAppDispatch } from "../../hooks/redux";
 
-const SearchInput = () => {
-  const dispatch = useDispatch();
+const SearchInput:FC = () => {
+  const dispatch = useAppDispatch();
   const { searchKeyword } = useSelector((state) => state.articles);
   const [keyword, setKeyword] = useState(searchKeyword);
 

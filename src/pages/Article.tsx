@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowDropright } from "react-icons/io";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import SnackBar from "../components/ui/SnackBar";
 import { countReadingMinutes } from "../helpers/articles";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 
-const Article = () => {
+const Article:FC = () => {
   const { id, source, author, title, description, url, urlToImage, publishedAt, content } =
     useSelector((state) => state.articles.selectedArticle || {});
   const readingMinutes = content ? countReadingMinutes(content) : null;

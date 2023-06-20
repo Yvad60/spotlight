@@ -6,8 +6,15 @@ import { setSelectedArticle } from "../../../features/articles/articlesSlice";
 import { normalizeAuthors } from "../../../helpers/articles";
 import FeaturedNewsSkeleton from "../../skeletons/FeaturedNewsCard";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
+import { FC } from "react";
 
-const FeaturedNews = ({ variant, article, isFetching }) => {
+interface FeaturedNewsProps {
+  variant:string;
+  article:Article;
+  isFetching: boolean
+}
+
+const FeaturedNews:FC<FeaturedNewsProps> = ({ variant, article, isFetching }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

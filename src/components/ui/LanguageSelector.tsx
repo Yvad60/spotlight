@@ -3,8 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { setQueryLanguage } from "../../features/articles/articlesSlice";
 import franceFlag from "/images/france-flag.png";
 import ukFlag from "/images/united-kingdom-flag.png";
+import { FC } from "react";
 
-const LanguageSelector = ({ toggleNav, isMobile }) => {
+const LanguageSelector:FC = ({ toggleNav, isMobile }) => {
   const { queryLanguage } = useSelector((state) => state.articles);
   const dispatch = useDispatch();
   const navigate = useNavigate();

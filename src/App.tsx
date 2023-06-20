@@ -3,8 +3,9 @@ import Footer from "./components/ui/Footer";
 import Navbar from "./components/ui/Navbar";
 import Article from "./pages/Article";
 import Home from "./pages/Home";
+import { FC } from "react";
 
-const App = () => {
+const App: FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-light">
       <Navbar />

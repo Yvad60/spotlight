@@ -1,12 +1,21 @@
 import { nanoid } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { normalizeDate, removePublisherFromTitle } from "../../helpers/articles";
+import { Article } from "../../types";
+
+interface QueryArgs {
+  country: string;
+  category: string;
+  limit: string;
+  source: string;
+  searchKeyword: string;
+}
 
 const { VITE_API_BASE_URL, VITE_API_KEY } = import.meta.env;
 
-const withApiKey = (query) => `${query}&apiKey=${VITE_API_KEY}`;
+const withApiKey = (query: string) => `${query}&apiKey=${VITE_API_KEY}`;
 
-const normalizeArticles = (articles) =>
+const normalizeArticles = (articles: Article[]) =>
   articles.map((article) => ({
     ...article,
     id: nanoid(),
@@ -17,7 +26,7 @@ const normalizeArticles = (articles) =>
 const apiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: VITE_API_BASE_URL }),
   endpoints: (builder) => ({
-    fetchArticles: builder.query({
+    fetchArticles: builder.query<Article, QueryArgs>({
       query: (args) => {
         const { country, category, limit, source, searchKeyword } = args;
         if (searchKeyword)

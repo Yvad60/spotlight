@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: ArticleSliceState = {
   queryLanguage: "us",
   selectedCategory: "trending",
   limit: 10,
   selectedPublisher: null,
   searchKeyword: "",
+  selectedArticle: null,
 };
 
 const articlesSlice = createSlice({

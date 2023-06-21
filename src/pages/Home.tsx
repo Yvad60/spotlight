@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { unfoundArticlesMessage } from "../common/articles";
 import Hero from "../components/sections/Hero";
 import MoreNews from "../components/sections/MoreNews";
 import SnackBar from "../components/ui/SnackBar";
+import { unfoundArticlesMessage } from "../constants/articles";
 import useArticlesFetch from "../hooks/useArticlesFetch";
 
 const Home:FC = () => {

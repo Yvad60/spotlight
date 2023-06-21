@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { FC, useState } from "react";
-import { categories } from "../../common/articles";
-import { setCategoryClasses } from "../../common/styles";
+import { categories } from "../../constants/articles";
+import { setCategoryClasses } from "../../constants/styles";
 import { setCategory } from "../../features/articles/articlesSlice";
 import CenterContent from "../layout/CenterContent";
 import LanguageSelector from "./LanguageSelector";

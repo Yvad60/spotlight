@@ -3,9 +3,9 @@ import { FaUser } from "react-icons/fa";
 import { IoMdArrowDropright } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { missingContentMessage } from "../common/articles";
 import CenterContent from "../components/layout/CenterContent";
 import SnackBar from "../components/ui/SnackBar";
+import { missingContentMessage } from "../constants/articles";
 import { countReadingMinutes } from "../helpers/articles";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
 

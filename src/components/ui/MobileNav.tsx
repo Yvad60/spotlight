@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import { categories } from "../../common/articles";
-import { setCategoryClasses } from "../../common/styles";
+import { categories } from "../../constants/articles";
+import { setCategoryClasses } from "../../constants/styles";
 import LanguageSelector from "./LanguageSelector";
 import Publishers from "./Publishers";
 import SearchInput from "./SearchInput";

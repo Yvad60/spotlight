@@ -1,11 +1,12 @@
-import { useSelector } from "react-redux";
+import { FC } from "react";
 import { setHeroSectionTitle } from "../../helpers/articles";
+import { useAppSelector } from "../../hooks/redux";
 import useArticlesFetch from "../../hooks/useArticlesFetch";
 import CenterContent from "../layout/CenterContent";
 import FeaturedNews from "../ui/cards/FeaturedNews";
 
-const Hero = () => {
-  const { selectedCategory, selectedPublisher, searchKeyword } = useSelector(
+const Hero: FC = () => {
+  const { selectedCategory, selectedPublisher, searchKeyword } = useAppSelector(
     (state) => state.articles
   );
   const { isFetching, data } = useArticlesFetch();

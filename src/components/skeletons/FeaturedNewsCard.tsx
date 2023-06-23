@@ -1,6 +1,12 @@
 import classnames from "classnames";
+import { FC } from "react";
 
-const FeaturedNewsCard = ({ variant, styles }) => {
+interface FeaturedNewsCardProps {
+  variant: "big" | "wide" | "small";
+  styles?: string;
+}
+
+const FeaturedNewsCard: FC<FeaturedNewsCardProps> = ({ variant, styles }) => {
   const titleClasses = classnames("bg-[#b9a18d] animate-pulse", {
     "h-4 md:h-7 rounded": variant === "big",
     "h-4 md:h-5 rounded": variant === "wide",
@@ -8,7 +14,7 @@ const FeaturedNewsCard = ({ variant, styles }) => {
   });
 
   return (
-    <div className={`border border-gray-300 ${styles.wrapperClasses}`}>
+    <div className={`border border-gray-300 ${styles}`}>
       <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 rounded bg-gradient-to-b from-transparent to-yellow-900 bg-opacity-5">
         <div className="flex flex-col gap-4 mb-6">
           <div className={`w-full ${titleClasses}`}></div>

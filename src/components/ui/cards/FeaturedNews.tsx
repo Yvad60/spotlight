@@ -1,15 +1,22 @@
 import classnames from "classnames";
+import { FC } from "react";
 import { FaUser } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSelectedArticle } from "../../../features/articles/articlesSlice";
 import { normalizeAuthors } from "../../../helpers/articles";
 import FeaturedNewsSkeleton from "../../skeletons/FeaturedNewsCard";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
+import { useAppDispatch } from "../../../hooks/redux";
 
-const FeaturedNews = ({ variant, article, isFetching }) => {
+interface FeaturedNewsProps {
+  variant: "big" | "wide" | "small";
+  article: Article | undefined;
+  isFetching: boolean;
+}
+
+const FeaturedNews: FC<FeaturedNewsProps> = ({ variant, article, isFetching }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const titleClasses = classnames("font-semibold mb-3 line-clamp-3", {
     "text-xl sm:text-2xl md:text-4xl": variant === "big",
@@ -30,7 +37,8 @@ const FeaturedNews = ({ variant, article, isFetching }) => {
     }
   );
 
-  if (isFetching) return <FeaturedNewsSkeleton variant={variant} styles={{ wrapperClasses }} />;
+  if (isFetching || !article)
+    return <FeaturedNewsSkeleton variant={variant} styles={wrapperClasses} />;
 
   const { id, source, author, title, description, urlToImage, publishedAt } = article;
 

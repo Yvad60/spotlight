@@ -1,19 +1,25 @@
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setQueryLanguage } from "../../features/articles/articlesSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import franceFlag from "/images/france-flag.png";
 import ukFlag from "/images/united-kingdom-flag.png";
 
-const LanguageSelector = ({ toggleNav, isMobile }) => {
-  const { queryLanguage } = useSelector((state) => state.articles);
-  const dispatch = useDispatch();
+interface LanguageSelectorProps {
+  toggleNav?: () => void;
+  isMobile?: boolean;
+}
+
+const LanguageSelector: FC<LanguageSelectorProps> = ({ toggleNav, isMobile }) => {
+  const { queryLanguage } = useAppSelector((state) => state.articles);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const selectLanguage = (language) => {
+  const selectLanguage = (language: "us" | "fr") => {
     dispatch(setQueryLanguage(language));
     if (pathname !== "/") navigate("/");
-    if (isMobile) toggleNav();
+    if (isMobile && !!toggleNav) toggleNav();
   };
 
   return (

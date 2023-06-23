@@ -1,4 +1,6 @@
-const PublisherRow = () => {
+import { FC } from "react";
+
+const PublisherRow: FC = () => {
   return (
     <div className="px-2 py-4">
       <div className="h-[14px] w-2/5 bg-[#dacebd] rounded-md animate-pulse"></div>

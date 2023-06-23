@@ -7,10 +7,10 @@ const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     articles: articlesReducer,
   },
-  middleware: (getDefaultMiddleware) => [
-    ...getDefaultMiddleware(),
-    apiSlice.middleware,
-  ],
+  middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), apiSlice.middleware],
 });
 
 export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

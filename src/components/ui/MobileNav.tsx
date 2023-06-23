@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
-import { useSelector } from "react-redux";
-import { categories } from "../../common/articles";
-import { setCategoryClasses } from "../../common/styles";
+import { categories } from "../../constants/articles";
+import { setCategoryClasses } from "../../constants/styles";
+import { useAppSelector } from "../../hooks/redux";
 import LanguageSelector from "./LanguageSelector";
 import Publishers from "./Publishers";
 import SearchInput from "./SearchInput";
 
-const MobileNav = ({ toggleNav, selectCategory }) => {
-  const { selectedCategory } = useSelector((state) => state.articles);
+interface MobileNavProps {
+  toggleNav: () => void;
+  selectCategory: (category: string) => void;
+}
+
+const MobileNav: FC<MobileNavProps> = ({ toggleNav, selectCategory }) => {
+  const { selectedCategory } = useAppSelector((state) => state.articles);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [publishersOpen, setPublisherOpen] = useState(false);
 

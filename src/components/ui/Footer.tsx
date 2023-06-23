@@ -1,7 +1,8 @@
 import { FaGithub } from "react-icons/fa";
 import CenterContent from "../layout/CenterContent";
+import { FC } from "react";
 
-const Footer = () => {
+const Footer:FC = () => {
   return (
     <footer className="py-8 mt-auto bg-primary text-light">
       <CenterContent>

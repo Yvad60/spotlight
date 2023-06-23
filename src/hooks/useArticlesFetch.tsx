@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
 import { useFetchArticlesQuery } from "../features/api/apiSlice";
+import { useAppSelector } from "./redux";
 
 const useArticlesFetch = () => {
-  const { queryLanguage, selectedCategory, limit, selectedPublisher, searchKeyword } = useSelector(
+  const { queryLanguage, selectedCategory, limit, selectedPublisher, searchKeyword } = useAppSelector(
     (state) => state.articles
   );
 

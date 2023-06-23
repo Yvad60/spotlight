@@ -1,25 +1,25 @@
+import { FC, useState } from "react";
 import { FiMenu } from "react-icons/fi";
 import { GrClose } from "react-icons/gr";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
-import { FC, useState } from "react";
 import { categories } from "../../constants/articles";
 import { setCategoryClasses } from "../../constants/styles";
 import { setCategory } from "../../features/articles/articlesSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { RootState } from "../../store/store";
 import CenterContent from "../layout/CenterContent";
 import LanguageSelector from "./LanguageSelector";
 import MobileNav from "./MobileNav";
 import SearchInput from "./SearchInput";
 
-const Navbar:FC = () => {
+const Navbar: FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { selectedCategory } = useSelector((state) => state.articles);
+  const dispatch = useAppDispatch();
+  const { selectedCategory } = useAppSelector((state: RootState) => state.articles);
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const selectCategory = (category) => {
+  const selectCategory = (category: string) => {
     dispatch(setCategory(category));
     if (pathname !== "/") navigate("/");
   };

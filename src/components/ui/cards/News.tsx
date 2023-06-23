@@ -1,17 +1,17 @@
+import { FC } from "react";
 import { FaUser } from "react-icons/fa";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSelectedArticle } from "../../../features/articles/articlesSlice";
 import { normalizeAuthors } from "../../../helpers/articles";
+import { useAppDispatch } from "../../../hooks/redux";
 import fallbackArticleCover from "/images/default-news-cover.jpg";
-import { FC } from "react";
 
-interface NewsProps{
-  article: Article
+interface NewsProps {
+  article: Article;
 }
 
-const News:FC<NewsProps> = ({ article }) => {
-  const dispatch = useDispatch();
+const News: FC<NewsProps> = ({ article }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { source, author, title, urlToImage, publishedAt } = article;
 

@@ -1,22 +1,22 @@
 import classNames from "classnames";
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, MouseEvent, useEffect, useState } from "react";
 import { BiCategoryAlt } from "react-icons/bi";
 import { BsGlobe } from "react-icons/bs";
 import { IoLanguage } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
 import { useFetchPublishersQuery } from "../../features/api/apiSlice";
 import { selectPublisher } from "../../features/articles/articlesSlice";
 import { getCountryFromCode, getLanguageFromCode } from "../../helpers/articles";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import PublisherRowSkeleton from "../skeletons/PublisherRow";
 
-const Publishers:FC = () => {
-  const dispatch = useDispatch();
-  const { selectedPublisher } = useSelector((state) => state.articles);
-  const { data, isFetching } = useFetchPublishersQuery();
+const Publishers: FC = () => {
+  const dispatch = useAppDispatch();
+  const { selectedPublisher } = useAppSelector((state) => state.articles);
+  const { data, isFetching } = useFetchPublishersQuery({});
   const [visiblePublishers, setVisiblePublishers] = useState(data);
 
-  const handleSelectPublisher = (publisher) => dispatch(selectPublisher(publisher));
-  const resetPublishers = (event) => {
+  const handleSelectPublisher = (publisher: Publisher) => dispatch(selectPublisher(publisher));
+  const resetPublishers = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     dispatch(selectPublisher(""));
   };
@@ -24,15 +24,15 @@ const Publishers:FC = () => {
   const badgeClasses = classNames(
     "px-2 capitalize flex items-center border rounded-full gap-[2px] md:py-[1px] border-gray-300 w-18 sm:w-auto"
   );
-  const setPublisherWrapperClasses = (publisher) =>
+  const setPublisherWrapperClasses = (publisher: Publisher) =>
     classNames("pb-2 pt-1 md:pt-2 md:pb-3 px-2 cursor-pointer text-slate-600 hover:bg-[#f1eee8]", {
       "bg-[#eae6df] sticky w-full top-0 bottom-0": publisher.id === selectedPublisher?.id,
     });
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setVisiblePublishers(
-      data.filter((publisher) => publisher.name.toLowerCase().includes(value.toLowerCase()))
+      data?.filter((publisher) => publisher.name.toLowerCase().includes(value.toLowerCase()))
     );
   };
 

@@ -5,7 +5,7 @@ interface QueryArgs {
   country: "us" | "fr";
   category: "trending" | "health" | "business" | "sports" | "technology";
   limit: 10;
-  source: string;
+  source: string | undefined;
   searchKeyword: string;
 }
 

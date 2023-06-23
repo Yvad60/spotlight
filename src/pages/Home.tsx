@@ -5,13 +5,16 @@ import SnackBar from "../components/ui/SnackBar";
 import { unfoundArticlesMessage } from "../constants/articles";
 import useArticlesFetch from "../hooks/useArticlesFetch";
 
-const Home:FC = () => {
+const Home: FC = () => {
   const { isFetching, isError, data, error } = useArticlesFetch();
 
-  if (!isFetching && isError)
+  if (!isFetching && isError && error)
     return (
       <div className="flex items-center justify-center flex-1 px-3">
-        <SnackBar message={error?.data?.message || error.error} variant="error" />
+        {"status" in error && (
+          <SnackBar message={(error.data as { message: string }).message} variant="error" />
+        )}
+        {"error" in error && <SnackBar message={error.error} variant="error" />}
       </div>
     );
 

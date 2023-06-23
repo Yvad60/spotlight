@@ -37,7 +37,7 @@ export const getLanguageFromCode = (languageCode: string) => {
 };
 
 export const setHeroSectionTitle = (
-  selectedPublisher: string,
+  selectedPublisher: string | undefined,
   selectedCategory: string,
   searchKeyword: string
 ) => {
@@ -49,7 +49,7 @@ export const setHeroSectionTitle = (
 };
 
 export const setMoreNewsSectionTitle = (
-  selectedPublisher: string,
+  selectedPublisher: string | undefined,
   selectedCategory: string,
   searchKeyword: string
 ) => {

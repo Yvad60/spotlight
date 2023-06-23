@@ -1,13 +1,14 @@
-import { useSelector } from "react-redux";
+import { FC } from "react";
 import { setMoreNewsSectionTitle } from "../../helpers/articles";
+import { useAppSelector } from "../../hooks/redux";
 import useArticlesFetch from "../../hooks/useArticlesFetch";
 import CenterContent from "../layout/CenterContent";
 import NewsCardSkeleton from "../skeletons/NewsCard";
 import Publishers from "../ui/Publishers";
 import NewsCard from "../ui/cards/News";
 
-const MoreNews = () => {
-  const { selectedCategory, selectedPublisher, searchKeyword } = useSelector(
+const MoreNews: FC = () => {
+  const { selectedCategory, selectedPublisher, searchKeyword } = useAppSelector(
     (state) => state.articles
   );
   const { isFetching, data } = useArticlesFetch();

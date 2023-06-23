@@ -1,17 +1,17 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, KeyboardEvent, useEffect, useState } from "react";
 import { CgSearch } from "react-icons/cg";
-import { useSelector } from "react-redux";
 import { setSearchKeyword } from "../../features/articles/articlesSlice";
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
-const SearchInput:FC = () => {
+const SearchInput: FC = () => {
   const dispatch = useAppDispatch();
-  const { searchKeyword } = useSelector((state) => state.articles);
+  const { searchKeyword } = useAppSelector((state) => state.articles);
   const [keyword, setKeyword] = useState(searchKeyword);
 
-  const handleChange = (event) => setKeyword(event.target.value);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => setKeyword(event.target.value);
   const handleSearch = () => dispatch(setSearchKeyword(keyword));
-  const searchByEnter = (event) => event.key === "Enter" && handleSearch();
+  const searchByEnter = (event: KeyboardEvent<HTMLInputElement>) =>
+    event.key === "Enter" && handleSearch();
 
   useEffect(() => {
     if (!searchKeyword) setKeyword("");

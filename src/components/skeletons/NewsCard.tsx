@@ -1,4 +1,6 @@
-const NewsCard = () => {
+import { FC } from "react";
+
+const NewsCard: FC = () => {
   return (
     <div className="flex flex-col">
       <div className="w-full rounded-sm shadow-sm h-[192px] bg-[#dacebd] animate-pulse" />

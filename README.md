@@ -16,7 +16,7 @@ Spotlight is a news app that delivers the latest news from around the world in r
 ## Technologies
 
 - **The News API**: the source of all data.
-- **JavaScript**: the main programming language.
+- **Typescript**: the main programming language.
 - **React**: the library for building the user interface.
 - **React-router**: the framework for generating routes in React.
 - **Redux**: the state management solution.

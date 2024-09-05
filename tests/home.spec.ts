@@ -1,6 +1,18 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Home page", () => {
+  const verifyCategory = async (
+    page: any,
+    category: string,
+    headingText: any
+  ): Promise<void> => {
+    await page.getByRole("navigation").getByText(category).click();
+    await page.waitForLoadState();
+    const articles = await page.$$('img[alt*="cover"]');
+    await expect(articles.length).toBe(10);
+    await expect(page.getByText(headingText)).toHaveClass(/font-bold/);
+  };
+
   test.beforeEach(async ({ page }) => {
     await page.route(
       "https://newsapi.org/v2/top-headlines?country=us&pageSize=10&apiKey=263c8404961d4cd79aab25224a547473",
@@ -25,24 +37,27 @@ test.describe("Home page", () => {
     await page.goto("/");
   });
 
-  test("should highlight the trending category as active", async ({ page }) => {
+  test("should highlight the trending category as active ", async ({
+    page,
+  }) => {
     const navItem = await page.$("nav>>text=Trending");
-    const isCategoryActive = await navItem?.evaluate((element) => {
-      return element.classList.contains("text-yellow-700");
-    });
+    const isCategoryActive = navItem?.evaluate((navItem) =>
+      navItem.classList.contains("text-yellow-700")
+    );
     await expect(isCategoryActive).toBeTruthy();
+    await expect(page.getByText(/Featured trending/)).toHaveClass(/font-bold/);
   });
 
-  test("should display 10 articles", async ({ page }) => {
-    const articles = await page.$$('img[alt*="cover"]');
-    await expect(articles.length).toBe(10);
+  test("should display the article  related to Health", async ({ page }) => {
+    await verifyCategory(page, "Health", /Featured news in health/);
   });
-
-  // test("should be able to navigate to one full article", async ({ page }) => {
-  //   const articles = await page.$$('img[alt*="cover"]');
-  //   const firstArticle = articles[0];
-  //     await firstArticle?.click();
-  //     await expect(page).toHaveURL(/article/);
-
-  // });
+  test("should display the article  related to Business", async ({ page }) => {
+    await verifyCategory(page, "Business", /Featured news in business/);
+  });
+  test("should display the article  related to Sports", async ({ page }) => {
+    await verifyCategory(page, "Sports", /Featured news in sports/);
+  });
+  test("should display the article related to Technology", async ({ page }) => {
+    await verifyCategory(page, "Technology", /Featured news in technology/);
+  });
 });

@@ -27,11 +27,11 @@ jobs:
 
       # Tag the Docker image for ACR
       - name: Tag Docker image
-        run: docker tag your-app-name:latest <your-registry-name>.azurecr.io/your-app-name:latest
+        run: docker tag spotlight:latest ${{secrets.ACR_USERNAME}}.azurecr.io/spotlight:latest
 
       # Push the Docker image to ACR
       - name: Push Docker image to ACR
-        run: docker push <your-registry-name>.azurecr.io/your-app-name:latest
+        run: docker push ${{secrets.ACR_USERNAME}}.azurecr.io/spotlight:latest
 
       # Log in to Azure
       - name: Log in to Azure CLI using access token

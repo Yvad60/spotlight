@@ -1,4 +1,11 @@
-export const categories = ["trending", "health", "business", "sports", "technology", "Muhoza"];
+export const categories = [
+  "trending",
+  "health",
+  "business",
+  "sports",
+  "technology",
+  "Muhoza kkkkkk",
+];
 
 export const unfoundArticlesMessage =
   "Sorry, there were no articles that matched your selection. You need to adjust selection and try again.";

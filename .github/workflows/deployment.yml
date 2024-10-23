@@ -36,7 +36,7 @@ jobs:
       # Log in to Azure
       - name: Log in to Azure CLI using access token
         run: |
-          az login --identity --username "${{ secrets.AZURE_ACCESS_TOKEN }}"
+          az login --access-token "${{ secrets.AZURE_ACCESS_TOKEN }}"
           az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
       # Deploy the Docker image to Azure App Service

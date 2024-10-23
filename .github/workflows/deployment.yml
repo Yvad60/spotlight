@@ -15,7 +15,7 @@ jobs:
 
       # Build the Docker image
       - name: Build the Docker image
-        run: docker build -t your-app-name:latest .
+        run: docker build -t spotlight:latest .
 
       # Log in to ACR
       - name: Log in to Azure Container Registry

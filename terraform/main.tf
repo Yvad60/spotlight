@@ -25,6 +25,15 @@ resource "netlify_environment_variable" "api_key" {
   }]
 }
 
+resource "netlify_environment_variable" "pnpm_flags" {
+  site_id = data.netlify_site.spotlight.id
+  key     = "PNPM_FLAGS"
+  values = [{
+    context = "all"
+    value   = "--strict-peer-dependencies false"
+  }]
+}
+
 resource "netlify_site_build_settings" "spotlight" {
   site_id           = data.netlify_site.spotlight.id
   production_branch = "main"

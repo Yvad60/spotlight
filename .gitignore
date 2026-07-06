@@ -41,3 +41,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 *.tfplan
+
+*storybook.log
+storybook-static

@@ -1,5 +1,7 @@
+import tailwindScrollbar from "tailwind-scrollbar";
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ["./src/**/*.{tsx,ts}"],
   theme: {
     extend: {
@@ -13,5 +15,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
+  plugins: [tailwindScrollbar({ nocompatible: true })],
 };

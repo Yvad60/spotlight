@@ -1,11 +1,10 @@
-import { FC, ReactNode } from "react";
+import { FC, PropsWithChildren } from "react";
 
-interface CenterContentProps{
-  children : ReactNode;
-  size?: string
+interface CenterContentProps {
+  size?: "medium" | "large";
 }
 
-const CenterContent:FC<CenterContentProps> = ({ children, size }) => {
+const CenterContent: FC<PropsWithChildren<CenterContentProps>> = ({ children, size }) => {
   return (
     <div className={`w-11/12 mx-auto ${size === "medium" ? "max-w-[1200px]" : "max-w-[1300px]"} `}>
       {children}

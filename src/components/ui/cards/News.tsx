@@ -28,7 +28,7 @@ const News: FC<NewsProps> = ({ article }) => {
       <img
         src={urlToImage || fallbackArticleCover}
         alt="Article cover"
-        className="object-cover w-full rounded-sm shadow-sm h-[192px]"
+        className="object-cover w-full rounded-xs shadow-xs h-[192px]"
       />
       <h4 className="mt-3 text-lg font-bold leading-7 line-clamp-3">{title}</h4>
       <div className="flex items-end justify-between mt-1 text-sm text-yellow-900">

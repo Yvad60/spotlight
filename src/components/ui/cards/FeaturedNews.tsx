@@ -52,7 +52,7 @@ const FeaturedNews: FC<FeaturedNewsProps> = ({ variant, article, isFetching }) =
       <h3 className="absolute px-3 mx-4 mt-3 text-sm font-semibold text-white bg-yellow-600 rounded-full shadow-md sm:text-base sm:mt-5 py-[3px] sm:py-[6px]">
         {source.name}
       </h3>
-      <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 rounded-sm bg-gradient-to-b from-transparent to-yellow-900 bg-opacity-5 text-light">
+      <div className="absolute flex flex-col justify-end w-full h-full px-4 py-5 rounded-xs bg-linear-to-b from-transparent to-yellow-900 bg-opacity-5 text-light">
         <h3 className={titleClasses}>{title}</h3>
 
         {variant === "big" && (
@@ -70,7 +70,7 @@ const FeaturedNews: FC<FeaturedNewsProps> = ({ variant, article, isFetching }) =
       <img
         src={urlToImage || fallbackArticleCover}
         alt="article cover"
-        className="object-cover w-full h-full rounded-sm"
+        className="object-cover w-full h-full rounded-xs"
       />
     </div>
   );

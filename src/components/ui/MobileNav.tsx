@@ -15,22 +15,24 @@ interface MobileNavProps {
 const MobileNav: FC<MobileNavProps> = ({ toggleNav, selectCategory }) => {
   const { selectedCategory } = useAppSelector((state) => state.articles);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
-  const [publishersOpen, setPublisherOpen] = useState(false);
+  const [publishersOpen, setPublishersOpen] = useState(false);
 
   const toggleCategories = () => {
-    if (publishersOpen) setPublisherOpen(false);
+    if (publishersOpen) setPublishersOpen(false);
     setCategoriesOpen(!categoriesOpen);
   };
 
   const togglePublishers = () => {
     if (categoriesOpen) setCategoriesOpen(false);
-    setPublisherOpen(!publishersOpen);
+    setPublishersOpen(!publishersOpen);
   };
 
   return (
     <div className="flex flex-col items-center md:hidden">
       <div className="flex flex-col w-full">
         <div
+          role="button"
+          tabIndex={0}
           className="flex items-center justify-between py-2 border-b-2"
           onClick={toggleCategories}
         >
@@ -57,7 +59,12 @@ const MobileNav: FC<MobileNavProps> = ({ toggleNav, selectCategory }) => {
           ))}
       </div>
 
-      <div className="flex justify-between w-full py-2 border-b-2" onClick={togglePublishers}>
+      <div
+        className="flex justify-between w-full py-2 border-b-2"
+        onClick={togglePublishers}
+        role="button"
+        tabIndex={0}
+      >
         <h3 className="text-lg font-bold">Available publishers</h3>
         <FiChevronDown
           className={`text-2xl transition-transform duration-100 ease-in ${

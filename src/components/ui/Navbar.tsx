@@ -48,13 +48,13 @@ const Navbar: FC = () => {
 
         <div className="justify-center hidden gap-8 mt-4 font-semibold md:flex">
           {categories.map((category, index) => (
-            <nav
+            <button
               key={index}
               className={setCategoryClasses(category, selectedCategory)}
               onClick={() => selectCategory(category)}
             >
               {category}
-            </nav>
+            </button>
           ))}
         </div>
       </CenterContent>

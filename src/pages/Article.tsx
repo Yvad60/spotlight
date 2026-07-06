@@ -26,7 +26,7 @@ const Article: FC = () => {
           <img
             src={urlToImage || fallbackArticleCover}
             alt=""
-            className="object-cover object-top w-full h-full rounded-sm"
+            className="object-cover object-top w-full h-full rounded-xs"
           />
         </div>
         <h1 className="w-11/12 mt-5 text-xl font-semibold sm:text-2xl md:text-5xl">{title}</h1>
@@ -35,7 +35,7 @@ const Article: FC = () => {
         </div>
         <div className="flex flex-col justify-between mt-4 md:flex-row">
           <div className="flex items-center gap-3">
-            <FaUser className="flex-shrink-0 text-2xl sm:text-3xl text-zinc-600" />
+            <FaUser className="shrink-0 text-2xl sm:text-3xl text-zinc-600" />
             <div className="flex flex-col justify-center overflow-hidden">
               <h5 className="w-full font-semibold">{author || "Anonymous"}</h5>
               <h5 className="font-semibold">{source.name}</h5>
@@ -61,7 +61,12 @@ const Article: FC = () => {
         </a>
 
         <div className={`transition-all duration-300 ${isMessageVisible && "relative mb-28"}`}>
-          <div className="mt-3 cursor-pointer flex text-[13px] w-fit" onClick={toggleMessage}>
+          <div
+            role="button"
+            tabIndex={0}
+            className="mt-3 cursor-pointer flex text-[13px] w-fit"
+            onClick={toggleMessage}
+          >
             <IoMdArrowDropright
               className={`text-2xl transition-transform duration-150 ease-in ${
                 isMessageVisible ? "rotate-90" : ""

@@ -28,7 +28,7 @@ const MoreNews: FC = () => {
               : data?.slice(4).map((article, index) => <NewsCard article={article} key={index} />)}
           </div>
 
-          <div className="flex-shrink-0 hidden md:block w-[300px] grow-0">
+          <div className="shrink-0 hidden md:block w-[300px] grow-0">
             <div className="sticky top-[134px]">
               <h3 className="pb-2 text-2xl font-semibold bg-light">Available publishers</h3>
               <Publishers />
